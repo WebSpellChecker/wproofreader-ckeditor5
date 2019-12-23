@@ -4,7 +4,7 @@ const path = require( 'path' );
 const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 
 module.exports = {
-	entry: './sample/app.js',
+	entry: './samples/app.js',
 
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
