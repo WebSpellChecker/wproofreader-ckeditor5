@@ -1,0 +1,14 @@
+{
+  "name": "wproofreader-ckeditor5",
+  "version": "0.0.1",
+  "description": "Proofreader feature for CKEditor 5.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebSpellChecker/wproofreader-ckeditor5.git"
+  },
+  "author": "WebSpellChecker (https://webspellchecker.com/)",
+  "bugs": {
+    "url": "https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues"
+  },
+  "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme"
+}
