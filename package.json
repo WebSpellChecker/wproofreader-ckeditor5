@@ -7,6 +7,7 @@
     "url": "https://github.com/WebSpellChecker/wproofreader-ckeditor5.git"
   },
   "scripts": {
+    "start": "./node_modules/.bin/webpack --mode development -w",
     "build": "./node_modules/.bin/webpack --mode development"
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
