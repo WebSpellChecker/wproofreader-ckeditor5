@@ -6,6 +6,10 @@
     "type": "git",
     "url": "https://github.com/WebSpellChecker/wproofreader-ckeditor5.git"
   },
+  "scripts": {
+    "start": "./node_modules/.bin/webpack --mode development -w",
+    "build": "./node_modules/.bin/webpack --mode development"
+  },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
   "bugs": {
     "url": "https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues"
@@ -13,5 +17,20 @@
   "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme",
   "devDependencies": {
     "eslint": "^6.8.0"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^16.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^12.0.5",
+    "@ckeditor/ckeditor5-editor-classic": "^16.0.0",
+    "@ckeditor/ckeditor5-essentials": "^16.0.0",
+    "@ckeditor/ckeditor5-heading": "^16.0.0",
+    "@ckeditor/ckeditor5-list": "^16.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^16.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^16.0.0",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^3.1.0",
+    "style-loader": "^1.1.1",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   }
 }
