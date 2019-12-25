@@ -5,11 +5,18 @@ import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
+import WProofreader from '../src/wproofreader'
 
 ClassicEditor
 	.create(document.querySelector('#editor'), {
-		plugins: [Essentials, Paragraph, Heading, List, Bold, Italic],
-		toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList']
+		plugins: [Essentials, Paragraph, Heading, List, Bold, Italic, WProofreader],
+		toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList'],
+		wproofreader: {
+			serviceProtocol: 'http',
+			serviceHost: 'localhost',
+			servicePort: '2880',
+			servicePath: '/'
+		}
 	})
 	.then(editor => {
 		console.log('Editor was initialized', editor);
