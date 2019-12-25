@@ -16,7 +16,12 @@
   },
   "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme",
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^3.1.0",
+    "style-loader": "^1.1.1",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^16.0.0",
@@ -26,11 +31,6 @@
     "@ckeditor/ckeditor5-heading": "^16.0.0",
     "@ckeditor/ckeditor5-list": "^16.0.0",
     "@ckeditor/ckeditor5-paragraph": "^16.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^16.0.0",
-    "postcss-loader": "^3.0.0",
-    "raw-loader": "^3.1.0",
-    "style-loader": "^1.1.1",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10"
+    "@ckeditor/ckeditor5-theme-lark": "^16.0.0"
   }
 }
