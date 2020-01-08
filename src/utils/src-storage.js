@@ -1,9 +1,7 @@
-
 /**
  * The global storage of the script src.
  */
 export default class SrcStorage {
-
 	/**
 	 * Creates an instance of the {@code SrcStorage}.
 	 * @public
@@ -40,8 +38,8 @@ export default class SrcStorage {
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} resolve - {@code resolve} function of {@code Promise}
-	 * @param {Function} reject - {@code reject} function of {@code Promise}
+	 * @param {Function} resolve - a {@code resolve} function of the {@code Promise}
+	 * @param {Function} reject - a {@code reject} function of the {@code Promise}
 	 */
 	addCallbacks(src, resolve, reject) {
 		window.WPROOFREADER_SRCSTORAGE[src].resolves.push(resolve);
@@ -49,29 +47,29 @@ export default class SrcStorage {
 	}
 
 	/**
-	 * Goes through each {@code resolve} element of the passed src and execute it.
+	 * Executes a provided callback function once for each {@code resolves} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed by each {@code resolve} element
+	 * @param {Function} callback - a function to be executed for each {@code resolves} element
 	 */
 	eachResolves(src, callback) {
 		window.WPROOFREADER_SRCSTORAGE[src].resolves.forEach(callback);
 	}
 
 	/**
-	 * Goes through each {@code reject} element of the passed src and execute it.
+	 * Executes a provided callback function once for each {@code rejects} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed by each {@code reject} element
+	 * @param {Function} callback - a function to be executed for each {@code rejects} element
 	 */
 	eachRejects(src, callback) {
 		window.WPROOFREADER_SRCSTORAGE[src].rejects.forEach(callback);
 	}
 
 	/**
-	 * Deletes the specific {@code WPROOFREADER_SRCSTORAGE}.
+	 * Deletes the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
 	 * @public
 	 */
 	delete(src) {

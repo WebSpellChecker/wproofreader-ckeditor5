@@ -4,7 +4,6 @@ import SrcStorage from './src-storage'
  * Loads script asynchronously.
  */
 export class ScriptLoader {
-
 	/**
 	 * Creates an instance of the {@code ScriptLoader}.
 	 * @public
@@ -80,7 +79,7 @@ export class ScriptLoader {
 	}
 
 	/**
-	 * Subscribers on a load event of the script.
+	 * Subscribes on a load event of the script.
 	 * @private
 	 */
 	_subscribeOnScriptLoad() {
@@ -95,7 +94,7 @@ export class ScriptLoader {
 	}
 
 	/**
-	 * Subscribers on an error event of the script.
+	 * Subscribes on an error event of the script.
 	 * @private
 	 */
 	_subscribeOnScriptError() {
@@ -111,7 +110,7 @@ export class ScriptLoader {
 	}
 
 	/**
-	 * Destroys the {@link SrcStorage} and the src of the script.
+	 * Destroys the {@code SrciptLoader}.
 	 * @private
 	 */
 	_destroy() {

@@ -35,7 +35,7 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Gets the configuration of the {@code WEBSPELLCHECKER}.
+	 * Gets the configuration of the {@code WEBSPELLCHECKER} from the {@code CKEditor 5} config.
 	 * @private
 	 */
 	_getConfig() {
