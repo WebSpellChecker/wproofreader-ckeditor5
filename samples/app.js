@@ -15,7 +15,8 @@ ClassicEditor
 			serviceProtocol: 'http',
 			serviceHost: 'localhost',
 			servicePort: '2880',
-			servicePath: '/'
+			servicePath: '/',
+			srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
 		}
 	})
 	.then(editor => {
