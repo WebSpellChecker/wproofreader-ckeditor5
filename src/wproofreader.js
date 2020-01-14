@@ -6,6 +6,13 @@ import { ScriptLoader } from './utils/script-loader';
  */
 export default class WProofreader extends Plugin {
 	/**
+	 * @inheritdoc
+	 */
+	static get pluginName() {
+		return 'WProofreader';
+	}
+
+	/**
 	 * Initializes the {@code WProofreader} plugin.
 	 * @public
 	 */
@@ -17,8 +24,8 @@ export default class WProofreader extends Plugin {
 			.then(() => {
 				this._handleWscbundleLoaded();
 			})
-			.catch(error => {
-				throw new Error(error);
+			.catch((error) => {
+				Promise.reject(error);
 			});
 	}
 

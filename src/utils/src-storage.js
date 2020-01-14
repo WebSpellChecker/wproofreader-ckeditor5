@@ -7,7 +7,15 @@ export default class SrcStorage {
 	 * @public
 	 */
 	constructor() {
+		this._create();
+	}
+
+	/**
+	 * Creates the storage of the src of the script.
+	 */
+	_create() {
 		window.WPROOFREADER_SRCSTORAGE = window.WPROOFREADER_SRCSTORAGE || {};
+		this._storage = window.WPROOFREADER_SRCSTORAGE;
 	}
 
 	/**
@@ -15,9 +23,10 @@ export default class SrcStorage {
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
+	 * @returns {Boolean} - {@code True} if src of the scripts exists {@code False} otherwise
 	 */
 	has(src) {
-		return window.WPROOFREADER_SRCSTORAGE[src] ? true : false;
+		return this._storage[src] ? true : false;
 	}
 
 	/**
@@ -27,7 +36,7 @@ export default class SrcStorage {
 	 * @param {String} src - a source of the script
 	 */
 	add(src) {
-		window.WPROOFREADER_SRCSTORAGE[src] = {
+		this._storage[src] = {
 			resolves: [],
 			rejects: []
 		};
@@ -42,8 +51,8 @@ export default class SrcStorage {
 	 * @param {Function} reject - a {@code reject} function of the {@code Promise}
 	 */
 	addCallbacks(src, resolve, reject) {
-		window.WPROOFREADER_SRCSTORAGE[src].resolves.push(resolve);
-		window.WPROOFREADER_SRCSTORAGE[src].rejects.push(reject);
+		this._storage[src].resolves.push(resolve);
+		this._storage[src].rejects.push(reject);
 	}
 
 	/**
@@ -53,8 +62,8 @@ export default class SrcStorage {
 	 * @param {String} src - a source of the script
 	 * @param {Function} callback - a function to be executed for each {@code resolves} element
 	 */
-	eachResolves(src, callback) {
-		window.WPROOFREADER_SRCSTORAGE[src].resolves.forEach(callback);
+	eachOnLoad(src, callback) {
+		this._storage[src].resolves.forEach(callback);
 	}
 
 	/**
@@ -64,15 +73,27 @@ export default class SrcStorage {
 	 * @param {String} src - a source of the script
 	 * @param {Function} callback - a function to be executed for each {@code rejects} element
 	 */
-	eachRejects(src, callback) {
-		window.WPROOFREADER_SRCSTORAGE[src].rejects.forEach(callback);
+	eachOnError(src, callback) {
+		this._storage[src].rejects.forEach(callback);
 	}
 
 	/**
 	 * Deletes the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
 	 * @public
+	 *
+	 * @param {String} src - a source of the script
 	 */
 	delete(src) {
-		delete window.WPROOFREADER_SRCSTORAGE[src];
+		delete this._storage[src];
+	}
+
+	/**
+	 * Obtains the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
+	 * @public
+	 *
+	 * @param {String} src - a source of the script
+	 */
+	get(src) {
+		return this._storage[src];
 	}
 }
