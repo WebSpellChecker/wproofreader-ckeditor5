@@ -2,4 +2,6 @@
 .vscode
 npm-debug.log
 node_modules/
+build/
+coverage
 dist/
