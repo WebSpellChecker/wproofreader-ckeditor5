@@ -28,7 +28,8 @@ describe('ScriptLoader', () => {
 	});
 
 	it('should throw an error because of the invalid src of the script', () => {
-		expect(() => new ScriptLoader()).to.throw();
+		const func = () => new ScriptLoader();
+		expect(func).to.throw();
 	});
 
 	it('_isScriptOnPage() method should return true', () => {
@@ -38,11 +39,13 @@ describe('ScriptLoader', () => {
 		const head = document.getElementsByTagName('head')[0];
 		head.appendChild(script);
 
-		expect(new ScriptLoader(src)._isScriptOnPage()).to.be.true;
+		const isScriptOnPage = new ScriptLoader(src)._isScriptOnPage();
+		expect(isScriptOnPage).to.be.true;
 	});
 
 	it('_isScriptOnPage() method should return false', () => {
-		expect(new ScriptLoader(src)._isScriptOnPage()).to.be.false;
+		const isScriptOnPage = new ScriptLoader(src)._isScriptOnPage();
+		expect(isScriptOnPage).to.be.false;
 	});
 
 	it('should create script', () => {
@@ -107,17 +110,18 @@ describe('ScriptLoader', () => {
 	});
 
 	it('should not load existing script', () => {
+		const script = document.createElement('script');
+		script.src = src;
+
+		const head = document.getElementsByTagName('head')[0];
+		head.appendChild(script);
+
 		const scriptLoader = new ScriptLoader(src);
+		const spy = sinon.spy(scriptLoader, '_processExistingScript');
 
 		return scriptLoader.load()
 			.then(() => {
-				const newScriptLoader = new ScriptLoader(src);
-				const spy = sinon.spy(newScriptLoader, '_processExistingScript');
-
-				newScriptLoader
-					.load().then(() => {
-						sinon.assert.called(spy);
-					});
+				sinon.assert.called(spy);
 			});
 	});
 
@@ -180,8 +184,8 @@ describe('ScriptLoader', () => {
 
 	it('should call _addCallbacs() method', () => {
 		const scriptLoader = new ScriptLoader(src);
-
 		const newScriptLoader = new ScriptLoader(src);
+
 		const spy = sinon.spy(newScriptLoader, '_addCallbacks');
 
 		scriptLoader.load();
