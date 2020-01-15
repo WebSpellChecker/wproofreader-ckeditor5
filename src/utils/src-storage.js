@@ -12,6 +12,7 @@ export default class SrcStorage {
 
 	/**
 	 * Creates the storage of the src of the script.
+	 * @private
 	 */
 	_create() {
 		window.WPROOFREADER_SRCSTORAGE = window.WPROOFREADER_SRCSTORAGE || {};
