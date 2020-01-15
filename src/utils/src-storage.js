@@ -7,7 +7,16 @@ export default class SrcStorage {
 	 * @public
 	 */
 	constructor() {
+		this._create();
+	}
+
+	/**
+	 * Creates the storage of the src of the script.
+	 * @private
+	 */
+	_create() {
 		window.WPROOFREADER_SRCSTORAGE = window.WPROOFREADER_SRCSTORAGE || {};
+		this._storage = window.WPROOFREADER_SRCSTORAGE;
 	}
 
 	/**
@@ -15,9 +24,10 @@ export default class SrcStorage {
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
+	 * @returns {Boolean} - {@code True} if src of the scripts exists {@code False} otherwise
 	 */
 	has(src) {
-		return window.WPROOFREADER_SRCSTORAGE[src] ? true : false;
+		return this._storage[src] ? true : false;
 	}
 
 	/**
@@ -27,9 +37,9 @@ export default class SrcStorage {
 	 * @param {String} src - a source of the script
 	 */
 	add(src) {
-		window.WPROOFREADER_SRCSTORAGE[src] = {
-			resolves: [],
-			rejects: []
+		this._storage[src] = {
+			onLoad: [],
+			onError: []
 		};
 	}
 
@@ -42,37 +52,49 @@ export default class SrcStorage {
 	 * @param {Function} reject - a {@code reject} function of the {@code Promise}
 	 */
 	addCallbacks(src, resolve, reject) {
-		window.WPROOFREADER_SRCSTORAGE[src].resolves.push(resolve);
-		window.WPROOFREADER_SRCSTORAGE[src].rejects.push(reject);
+		this._storage[src].onLoad.push(resolve);
+		this._storage[src].onError.push(reject);
 	}
 
 	/**
-	 * Executes a provided callback function once for each {@code resolves} element.
+	 * Executes a provided callback function once for each {@code onLoad} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed for each {@code resolves} element
+	 * @param {Function} callback - a function to be executed for each {@code onLoad} element
 	 */
-	eachResolves(src, callback) {
-		window.WPROOFREADER_SRCSTORAGE[src].resolves.forEach(callback);
+	eachOnLoad(src, callback) {
+		this._storage[src].onLoad.forEach(callback);
 	}
 
 	/**
-	 * Executes a provided callback function once for each {@code rejects} element.
+	 * Executes a provided callback function once for each {@code onError} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed for each {@code rejects} element
+	 * @param {Function} callback - a function to be executed for each {@code onError} element
 	 */
-	eachRejects(src, callback) {
-		window.WPROOFREADER_SRCSTORAGE[src].rejects.forEach(callback);
+	eachOnError(src, callback) {
+		this._storage[src].onError.forEach(callback);
 	}
 
 	/**
 	 * Deletes the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
 	 * @public
+	 *
+	 * @param {String} src - a source of the script
 	 */
 	delete(src) {
-		delete window.WPROOFREADER_SRCSTORAGE[src];
+		delete this._storage[src];
+	}
+
+	/**
+	 * Returns the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
+	 * @public
+	 *
+	 * @param {String} src - a source of the script
+	 */
+	get(src) {
+		return this._storage[src];
 	}
 }

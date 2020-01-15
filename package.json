@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack --mode development -w",
-    "build": "./node_modules/.bin/webpack --mode development"
+    "build": "./node_modules/.bin/webpack --mode development",
+    "test": "concurrently --kill-others --success \"first\" \"node --max_old_space_size=4096 node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js -c -w --files=ckeditor5\" \"http-server -c-0 --cors -p 3000 -s\""
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
   "bugs": {
@@ -16,7 +17,10 @@
   },
   "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme",
   "devDependencies": {
+    "@ckeditor/ckeditor5-dev-tests": "^17.1.0",
+    "concurrently": "^5.0.2",
     "eslint": "^6.8.0",
+    "http-server": "^0.12.1",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^3.1.0",
     "style-loader": "^1.1.1",

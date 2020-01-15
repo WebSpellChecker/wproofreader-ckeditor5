@@ -11,6 +11,8 @@ export class ScriptLoader {
 	 * @param {String} src - url of the script
 	 */
 	constructor(src) {
+		this._validateSrc(src);
+
 		this._src = src;
 		this._globalSrcStorage = new SrcStorage();
 	}
@@ -21,8 +23,6 @@ export class ScriptLoader {
 	 */
 	load() {
 		return new Promise((resolve, reject) => {
-			this._validateSrc(reject);
-
 			if (!this._isScriptOnPage()) {
 				this._createScript(resolve, reject);
 			} else {
@@ -35,9 +35,9 @@ export class ScriptLoader {
 	 * Checks if the src of the script exists otherwise throws an {@code Error}.
 	 * @private
 	 */
-	_validateSrc(reject) {
-		if (!this._src) {
-			reject(new Error("Path to the script is not specified."));
+	_validateSrc(src) {
+		if (!src) {
+			throw new Error("Path to the script is not specified.");
 		}
 	}
 
@@ -62,7 +62,7 @@ export class ScriptLoader {
 		this._subscribeOnScriptLoad();
 		this._subscribeOnScriptError();
 
-		this._appendScript();
+		this._appendScript(this._script);
 	}
 
 	/**
@@ -85,8 +85,8 @@ export class ScriptLoader {
 	_subscribeOnScriptLoad() {
 		this._script.onload = () => {
 
-			this._globalSrcStorage.eachResolves(this._src, (resolve) => {
-				resolve();
+			this._globalSrcStorage.eachOnLoad(this._src, (callback) => {
+				callback();
 			})
 
 			this._destroy();
@@ -101,8 +101,8 @@ export class ScriptLoader {
 		this._script.onerror = () => {
 			const error = new Error(`${this._src} failed to load.`);
 
-			this._globalSrcStorage.eachRejects(this._src, (reject) => {
-				reject(error);
+			this._globalSrcStorage.eachOnError(this._src, (callback) => {
+				callback(error);
 			})
 
 			this._destroy();
@@ -133,21 +133,37 @@ export class ScriptLoader {
 	 * Appends the script to the {@code head} block of a html page.
 	 * @private
 	 */
-	_appendScript() {
+	_appendScript(script) {
 		const head = document.getElementsByTagName('head')[0];
 
-		head.appendChild(this._script);
+		head.appendChild(script);
 	}
 
 	/**
-	 * Processes existing script.
+	 * Processes existing script. It is not known whether it is fully loaded.
 	 * @private
 	 */
 	_processExistingScript(resolve, reject) {
 		if (this._globalSrcStorage.has(this._src)) {
-			this._globalSrcStorage.addCallbacks(this._src, resolve, reject);
+			this._addCallbacks(resolve, reject);
 		} else {
-			resolve();
+			this._processLoadedScript(resolve);
 		}
+	}
+
+	/**
+	 * Adds callbacks to the storage. Called when the script is on the page, but is not loaded yet.
+	 * @private
+	 */
+	_addCallbacks(resolve, reject) {
+		this._globalSrcStorage.addCallbacks(this._src, resolve, reject);
+	}
+
+	/**
+	 * Processes loaded script. Called when the script on the page is fully loaded and ready to use.
+	 * @private
+	 */
+	_processLoadedScript(resolve) {
+		resolve();
 	}
 }
