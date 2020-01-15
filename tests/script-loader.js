@@ -18,7 +18,7 @@ describe('ScriptLoader', () => {
 		expect(scriptLoader._globalSrcStorage).to.be.exist;
 	});
 
-	it('should load script', () => {
+	it('should load the script', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		return scriptLoader.load()
@@ -48,7 +48,7 @@ describe('ScriptLoader', () => {
 		expect(isScriptOnPage).to.be.false;
 	});
 
-	it('should create script', () => {
+	it('should create the script', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		const spy = sinon.spy(scriptLoader, '_createScript');
@@ -76,7 +76,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should execute onLoad callback', () => {
+	it('should execute eachOnLoad method', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		const spy = sinon.spy(scriptLoader._globalSrcStorage, 'eachOnLoad');
@@ -98,7 +98,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should execute onError callback', () => {
+	it('should execute eachOnError method', () => {
 		const scriptLoader = new ScriptLoader('test.js');
 
 		const spy = sinon.spy(scriptLoader._globalSrcStorage, 'eachOnError');
@@ -109,7 +109,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should not load existing script', () => {
+	it('should not load the existing script', () => {
 		const script = document.createElement('script');
 		script.src = src;
 
@@ -125,7 +125,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should call _destroy() method', () => {
+	it('should destroy the ScriptLoader instance', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		const removeListenersSpy = sinon.spy(scriptLoader, '_removeListeners');
@@ -141,7 +141,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should call _appendScript() method', () => {
+	it('should call _appendScript method', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		const spy = sinon.spy(scriptLoader, '_appendScript');
@@ -154,7 +154,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should append script to the page', () => {
+	it('should append the script to the page', () => {
 		const scriptLoader = new ScriptLoader(src);
 
 		expect(getScript(src)).to.be.not.exist;
@@ -165,7 +165,7 @@ describe('ScriptLoader', () => {
 		expect(getScript(src)).to.be.exist;
 	});
 
-	it('should call _processLoadedScript() method', () => {
+	it('should call _processLoadedScript method', () => {
 		const script = document.createElement('script');
 		script.src = src;
 		script.async = false;
@@ -182,7 +182,7 @@ describe('ScriptLoader', () => {
 			});
 	});
 
-	it('should call _addCallbacs() method', () => {
+	it('should call _addCallbacks method', () => {
 		const scriptLoader = new ScriptLoader(src);
 		const newScriptLoader = new ScriptLoader(src);
 

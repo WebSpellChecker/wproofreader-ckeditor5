@@ -18,7 +18,7 @@ describe('SrcStorage', () => {
 		srcStorage = null;
 	});
 
-	it('should create storage', () => {
+	it('should create the storage', () => {
 		expect(srcStorage._storage).to.be.exist;
 	})
 
@@ -59,7 +59,7 @@ describe('SrcStorage', () => {
 		expect(spy.calledOnce).to.be.true;
 	});
 
-	it('should execute onload callback', () => {
+	it('should execute onLoad callback', () => {
 		const spy = sinon.spy();
 
 		srcStorage.add(src);
@@ -81,7 +81,7 @@ describe('SrcStorage', () => {
 		expect(spy.calledOnce).to.be.true;
 	});
 
-	it('should execute onerror callback', () => {
+	it('should execute onError callback', () => {
 		const spy = sinon.spy();
 
 		srcStorage.add(src);
