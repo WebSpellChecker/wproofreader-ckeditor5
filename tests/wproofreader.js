@@ -69,6 +69,7 @@ describe('WProofreader', () => {
 		it('should not start for invalid container', () => {
 			const span = document.createElement('span');
 			document.body.appendChild(span);
+
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
