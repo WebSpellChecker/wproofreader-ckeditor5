@@ -44,6 +44,14 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
+	 * Checks if the current editor has several roots.
+	 * @private
+	 */
+	_checkMultiRoot() {
+		return this.editor.editing.view.domRoots.size > 1 ? true : false;
+	}
+
+	/**
 	 * Gets the configuration of the {@code WEBSPELLCHECKER} from the {@code CKEditor 5} config.
 	 * @private
 	 */
@@ -58,11 +66,14 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Checks if the current editor has several roots.
+	 * Creates {@code WEBSPELLCHECKER} specific options.
 	 * @private
 	 */
-	_checkMultiRoot() {
-		return this.editor.editing.view.domRoots.size > 1 ? true : false;
+	_createOptions() {
+		return {
+			appType: 'wp-ck5',
+			disableDialog: this._isMultiRoot
+		};
 	}
 
 	/**
@@ -113,17 +124,6 @@ export default class WProofreader extends Plugin {
 	 */
 	_mergeOptions(container) {
 		return Object.assign(this._userOptions, this._options, { container: container });
-	}
-
-	/**
-	 * Creates {@code WEBSPELLCHECKER} specific options.
-	 * @private
-	 */
-	_createOptions() {
-		return {
-			appType: 'wp-ck5',
-			disableDialog: this._isMultiRoot
-		};
 	}
 
 	/**
