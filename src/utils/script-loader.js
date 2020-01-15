@@ -87,7 +87,7 @@ export class ScriptLoader {
 
 			this._globalSrcStorage.eachOnLoad(this._src, (callback) => {
 				callback();
-			})
+			});
 
 			this._destroy();
 		};
@@ -103,7 +103,7 @@ export class ScriptLoader {
 
 			this._globalSrcStorage.eachOnError(this._src, (callback) => {
 				callback(error);
-			})
+			});
 
 			this._destroy();
 		};

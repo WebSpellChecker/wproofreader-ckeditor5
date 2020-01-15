@@ -32,7 +32,7 @@ describe('WProofreader', () => {
 				.then((editor) => {
 					testEditor = editor;
 					wproofreader = testEditor.plugins.get('WProofreader');
-				})
+				});
 		});
 
 		afterEach(() => {
@@ -47,7 +47,7 @@ describe('WProofreader', () => {
 		});
 
 		it('should contain wproofreader option', () => {
-			expect(wproofreader).to.have.property('_config');
+			expect(wproofreader).to.have.property('_userOptions');
 		});
 
 		it('should save an instance of the WEBSPELLCHECKER', () => {
@@ -63,7 +63,52 @@ describe('WProofreader', () => {
 				})
 				.then((testEditor) => {
 					expect(testEditor.plugins.has('WProofreader')).to.be.false;
+				});
+		});
+
+		it('should not start for invalid container', () => {
+			const span = document.createElement('span');
+			document.body.appendChild(span);
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign(WPROOFREADER_CONFIG, { container: span })
 				})
+				.then((editor) => {
+					expect(editor.editing.view.getDomRoot('main')).to.not.be.equal(span);
+				});
 		});
 	});
+
+	describe('for multi root environment', () => {
+		it('should disable the dialog option of the WEBSPELLCHECKER', () => {
+			const classicEditor = new ClassicEditor(element, {
+				plugins: [WProofreader],
+				wproofreader: WPROOFREADER_CONFIG
+			});
+
+			classicEditor.editing.view.domRoots.set('main', element);
+			classicEditor.editing.view.domRoots.set('second', element);
+
+			return classicEditor.initPlugins()
+				.then(() => {
+					const wproofreader = classicEditor.plugins.get('WProofreader');
+
+					expect(wproofreader._options.disableDialog).to.be.true;
+				});
+		});
+
+		it('should not disable the dialog option of the WEBSPELLCHECKER', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._options.disableDialog).to.be.false;
+				});
+		});
+	})
 });
