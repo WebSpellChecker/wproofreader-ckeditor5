@@ -37,8 +37,8 @@ export default class SrcStorage {
 	 */
 	add(src) {
 		this._storage[src] = {
-			resolves: [],
-			rejects: []
+			onLoad: [],
+			onError: []
 		};
 	}
 
@@ -51,30 +51,30 @@ export default class SrcStorage {
 	 * @param {Function} reject - a {@code reject} function of the {@code Promise}
 	 */
 	addCallbacks(src, resolve, reject) {
-		this._storage[src].resolves.push(resolve);
-		this._storage[src].rejects.push(reject);
+		this._storage[src].onLoad.push(resolve);
+		this._storage[src].onError.push(reject);
 	}
 
 	/**
-	 * Executes a provided callback function once for each {@code resolves} element.
+	 * Executes a provided callback function once for each {@code onLoad} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed for each {@code resolves} element
+	 * @param {Function} callback - a function to be executed for each {@code onLoad} element
 	 */
 	eachOnLoad(src, callback) {
-		this._storage[src].resolves.forEach(callback);
+		this._storage[src].onLoad.forEach(callback);
 	}
 
 	/**
-	 * Executes a provided callback function once for each {@code rejects} element.
+	 * Executes a provided callback function once for each {@code onError} element.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
-	 * @param {Function} callback - a function to be executed for each {@code rejects} element
+	 * @param {Function} callback - a function to be executed for each {@code onError} element
 	 */
 	eachOnError(src, callback) {
-		this._storage[src].rejects.forEach(callback);
+		this._storage[src].onError.forEach(callback);
 	}
 
 	/**

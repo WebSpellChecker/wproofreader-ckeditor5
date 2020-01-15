@@ -85,8 +85,8 @@ export class ScriptLoader {
 	_subscribeOnScriptLoad() {
 		this._script.onload = () => {
 
-			this._globalSrcStorage.eachOnLoad(this._src, (resolve) => {
-				resolve();
+			this._globalSrcStorage.eachOnLoad(this._src, (callback) => {
+				callback();
 			})
 
 			this._destroy();
@@ -101,8 +101,8 @@ export class ScriptLoader {
 		this._script.onerror = () => {
 			const error = new Error(`${this._src} failed to load.`);
 
-			this._globalSrcStorage.eachOnError(this._src, (reject) => {
-				reject(error);
+			this._globalSrcStorage.eachOnError(this._src, (callback) => {
+				callback(error);
 			})
 
 			this._destroy();

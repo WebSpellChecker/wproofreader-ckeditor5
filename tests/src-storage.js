@@ -32,20 +32,20 @@ describe('SrcStorage', () => {
 	it('should create arrays of callbacks', () => {
 		srcStorage.add(src);
 
-		expect(srcStorage.get(src).resolves).to.be.exist;
-		expect(srcStorage.get(src).rejects).to.be.exist;
+		expect(srcStorage.get(src).onLoad).to.be.exist;
+		expect(srcStorage.get(src).onError).to.be.exist;
 	});
 
 	it('should add callbacks to the storage', () => {
 		srcStorage.add(src);
 
-		expect(srcStorage.get(src).resolves.length).to.be.equal(0);
-		expect(srcStorage.get(src).rejects.length).to.be.equal(0);
+		expect(srcStorage.get(src).onLoad.length).to.be.equal(0);
+		expect(srcStorage.get(src).onError.length).to.be.equal(0);
 
 		srcStorage.addCallbacks(src, () => { }, () => { });
 
-		expect(srcStorage.get(src).resolves.length).to.be.equal(1);
-		expect(srcStorage.get(src).rejects.length).to.be.equal(1);
+		expect(srcStorage.get(src).onLoad.length).to.be.equal(1);
+		expect(srcStorage.get(src).onError.length).to.be.equal(1);
 	});
 
 	it('should execute eachOnLoad callback', () => {
