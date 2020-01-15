@@ -25,7 +25,7 @@ export default class WProofreader extends Plugin {
 				this._handleWscbundleLoaded();
 			})
 			.catch((error) => {
-				Promise.reject(error);
+				throw new Error(error);
 			});
 	}
 
