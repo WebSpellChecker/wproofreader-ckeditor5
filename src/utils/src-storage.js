@@ -88,7 +88,7 @@ export default class SrcStorage {
 	}
 
 	/**
-	 * Obtains the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
+	 * Returns the {@code WPROOFREADER_SRCSTORAGE} field by the passed src.
 	 * @public
 	 *
 	 * @param {String} src - a source of the script
