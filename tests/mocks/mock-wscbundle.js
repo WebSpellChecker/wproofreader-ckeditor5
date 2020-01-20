@@ -1,8 +1,14 @@
 (function () {
 	window.WEBSPELLCHECKER = window.WEBSPELLCHECKER || {
 		init: function (config, callback) {
-			var instance = {
-				destroy: function () { }
+			const instance = {
+				destroy: function () { },
+				commitOption: function (changedOptions, settings) {
+					if (typeof config.onCommitOptions === 'function') {
+						settings = settings || {};
+						!settings.ignoreCallback && config.onCommitOptions(instance, changedOptions);
+					}
+				}
 			};
 
 			if (typeof callback === 'function') {
@@ -10,6 +16,6 @@
 			}
 
 			return instance;
-		}
+		},
 	};
 })();
