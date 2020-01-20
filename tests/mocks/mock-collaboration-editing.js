@@ -11,7 +11,6 @@ export class RealTimeCollaborativeEditing extends Plugin {
 	destroy() { }
 }
 
-
 export class RealTimeCollaborativeTrackChanges extends Plugin {
 
 	static get pluginName() {
@@ -22,7 +21,6 @@ export class RealTimeCollaborativeTrackChanges extends Plugin {
 
 	destroy() { }
 }
-
 
 export class RealTimeCollaborativeComments extends Plugin {
 
