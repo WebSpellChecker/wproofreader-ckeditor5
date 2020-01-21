@@ -1,6 +1,6 @@
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import WProofreader from '../src/wproofreader';
-import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing'
+import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing';
 
@@ -189,7 +189,7 @@ describe('WProofreader', () => {
 				});
 		});
 
-		describe('should synchronize options for editor with', () => {
+		describe('should synchronize WEBSPELLCHECKER options in the editor with', () => {
 			let editor;
 
 			beforeEach(() => {
