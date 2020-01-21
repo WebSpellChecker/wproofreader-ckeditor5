@@ -102,17 +102,17 @@ export default class WProofreader extends Plugin {
 	 * Handles the {@code commitOptions} behavior of the {@code WEBSPELLCHECKER} instance.
 	 * @private
 	 */
-	_onCommitOptions(inst, changeOptions) {
-		this._syncOptions(changeOptions);
+	_onCommitOptions(inst, changedOptions) {
+		this._syncOptions(changedOptions);
 	}
 
 	/**
 	 * Synchronizes the changed options between the each instance of the {@code WEBSPELLCHECKER}.
 	 * @private
 	 */
-	_syncOptions(changeOptions) {
+	_syncOptions(changedOptions) {
 		this._instances.forEach((instance) => {
-			instance.commitOption(changeOptions, { ignoreCallback: true });
+			instance.commitOption(changedOptions, { ignoreCallback: true });
 		});
 	}
 
