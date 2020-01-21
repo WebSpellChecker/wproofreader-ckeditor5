@@ -20,7 +20,7 @@ describe('SrcStorage', () => {
 
 	it('should create the storage', () => {
 		expect(srcStorage._storage).to.be.exist;
-	})
+	});
 
 	it('should add the src of the script to the storage', () => {
 		expect(srcStorage.has(src)).to.be.false;
