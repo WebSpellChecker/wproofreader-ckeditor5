@@ -16,6 +16,6 @@
 			}
 
 			return instance;
-		},
+		}
 	};
 })();
