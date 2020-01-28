@@ -1,4 +1,4 @@
-import SrcStorage from './src-storage'
+import SrcStorage from './src-storage';
 
 /**
  * Loads script asynchronously.

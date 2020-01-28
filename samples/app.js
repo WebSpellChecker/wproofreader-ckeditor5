@@ -5,7 +5,7 @@ import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import WProofreader from '../src/wproofreader'
+import WProofreader from '../src/wproofreader';
 
 ClassicEditor
 	.create(document.querySelector('#editor'), {
@@ -19,11 +19,11 @@ ClassicEditor
 			srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
 		}
 	})
-	.then(editor => {
+	.then((editor) => {
 		console.log('Editor was initialized', editor);
 
 		window.editor = editor;
 	})
-	.catch(error => {
+	.catch((error) => {
 		console.error(error);
 	});
