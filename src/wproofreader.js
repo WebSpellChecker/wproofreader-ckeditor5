@@ -48,28 +48,6 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Checks if the current editor has several roots.
-	 * @private
-	 */
-	_checkMultiRoot() {
-		return this.editor.editing.view.domRoots.size > 1 ? true : false;
-	}
-
-	/**
-	 * Checks if the current editor in the real-time collaboration mode.
-	 * @private
-	 */
-	_checkCollaborationMode() {
-		for (let i = 0; i <= this._collaborationPluginNames.length; i++) {
-			if (this.editor.plugins.has(this._collaborationPluginNames[i])) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Gets the configuration of the {@code WEBSPELLCHECKER} from the {@code CKEditor 5} config.
 	 * @private
 	 */
@@ -81,36 +59,6 @@ export default class WProofreader extends Plugin {
 		}
 
 		return config;
-	}
-
-	/**
-	 * Creates {@code WEBSPELLCHECKER} specific options.
-	 * @private
-	 */
-	_createOptions() {
-		return {
-			appType: 'proofreader_ck5',
-			disableDialog: this._isMultiRoot || this._isCollaboration,
-			onCommitOptions: this._onCommitOptions.bind(this)
-		};
-	}
-
-	/**
-	 * Handles the {@code commitOptions} behavior of the {@code WEBSPELLCHECKER} instance.
-	 * @private
-	 */
-	_onCommitOptions(inst, changedOptions) {
-		this._syncOptions(changedOptions);
-	}
-
-	/**
-	 * Synchronizes the changed options between the each instance of the {@code WEBSPELLCHECKER}.
-	 * @private
-	 */
-	_syncOptions(changedOptions) {
-		this._instances.forEach((instance) => {
-			instance.commitOption(changedOptions, { ignoreCallback: true });
-		});
 	}
 
 	/**
@@ -157,6 +105,58 @@ export default class WProofreader extends Plugin {
 		this._isMultiRoot = this._checkMultiRoot();
 		this._isCollaboration = this._checkCollaborationMode();
 		this._options = this._createOptions();
+	}
+
+	/**
+	 * Checks if the current editor has several roots.
+	 * @private
+	 */
+	_checkMultiRoot() {
+		return this.editor.editing.view.domRoots.size > 1 ? true : false;
+	}
+
+	/**
+	 * Checks if the current editor in the real-time collaboration mode.
+	 * @private
+	 */
+	_checkCollaborationMode() {
+		for (let i = 0; i <= this._collaborationPluginNames.length; i++) {
+			if (this.editor.plugins.has(this._collaborationPluginNames[i])) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Creates {@code WEBSPELLCHECKER} specific options.
+	 * @private
+	 */
+	_createOptions() {
+		return {
+			appType: 'proofreader_ck5',
+			disableDialog: this._isMultiRoot || this._isCollaboration,
+			onCommitOptions: this._onCommitOptions.bind(this)
+		};
+	}
+
+	/**
+	 * Handles the {@code commitOptions} behavior of the {@code WEBSPELLCHECKER} instance.
+	 * @private
+	 */
+	_onCommitOptions(inst, changedOptions) {
+		this._syncOptions(changedOptions);
+	}
+
+	/**
+	 * Synchronizes the changed options between the each instance of the {@code WEBSPELLCHECKER}.
+	 * @private
+	 */
+	_syncOptions(changedOptions) {
+		this._instances.forEach((instance) => {
+			instance.commitOption(changedOptions, { ignoreCallback: true });
+		});
 	}
 
 	/**
