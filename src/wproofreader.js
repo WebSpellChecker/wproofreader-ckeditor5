@@ -24,10 +24,7 @@ export default class WProofreader extends Plugin {
 			'RealTimeCollaborativeComments'
 		];
 
-		this._isMultiRoot = this._checkMultiRoot();
-		this._isCollaboration = this._checkCollaborationMode();
 		this._userOptions = this._getUserOptions();
-		this._options = this._createOptions();
 
 		this._loadWscbundle()
 			.then(() => {
@@ -145,9 +142,21 @@ export default class WProofreader extends Plugin {
 	_createInstances() {
 		const roots = this.editor.editing.view.domRoots.values();
 
+		this._setFields();
+
 		for (const root of roots) {
 			this._createInstance(root);
 		}
+	}
+
+	/**
+	 * Sets extra fields related to the {@code WEBSPELLCHECKER} instance creating.
+	 * @private
+	 */
+	_setFields() {
+		this._isMultiRoot = this._checkMultiRoot();
+		this._isCollaboration = this._checkCollaborationMode();
+		this._options = this._createOptions();
 	}
 
 	/**
