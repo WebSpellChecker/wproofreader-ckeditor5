@@ -170,6 +170,14 @@ describe('WProofreader', () => {
 
 			return editor.initPlugins()
 				.then(() => {
+					editor.ui.init(element);
+					editor.data.init(element);
+
+					editor.fire('ready');
+
+					return editor;
+				})
+				.then(() => {
 					const wproofreader = editor.plugins.get('WProofreader');
 
 					expect(wproofreader._options.disableDialog).to.be.true;
