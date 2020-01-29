@@ -56,7 +56,7 @@ export default class WProofreader extends Plugin {
 		const config = this.editor.config.get('wproofreader');
 
 		if (!config) {
-			throw new Error("No WProofreader configuration.");
+			throw new Error('No WProofreader configuration.');
 		}
 
 		return config;

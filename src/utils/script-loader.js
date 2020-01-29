@@ -37,7 +37,7 @@ export class ScriptLoader {
 	 */
 	_validateSrc(src) {
 		if (!src) {
-			throw new Error("Path to the script is not specified.");
+			throw new Error('Path to the script is not specified.');
 		}
 	}
 
