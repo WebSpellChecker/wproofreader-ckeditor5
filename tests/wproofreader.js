@@ -67,6 +67,34 @@ describe('WProofreader', () => {
 		});
 	});
 
+	describe('with theme option', () => {
+		it('should set gray theme', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.theme).to.be.equal('gray');
+				})
+		});
+
+		it('should set user theme', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign(WPROOFREADER_CONFIG, { theme: 'default' })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.theme).to.be.equal('default');
+				})
+		});
+	})
+
 	describe('with invalid configuration', () => {
 		it('should not be load', () => {
 			return ClassicEditor

@@ -25,6 +25,7 @@ export default class WProofreader extends Plugin {
 		];
 
 		this._userOptions = this._getUserOptions();
+		this._setTheme();
 
 		this._loadWscbundle()
 			.then(() => {
@@ -55,10 +56,20 @@ export default class WProofreader extends Plugin {
 		const config = this.editor.config.get('wproofreader');
 
 		if (!config) {
-			throw new Error("No WProofreader configuration.");
+			throw new Error('No WProofreader configuration.');
 		}
 
 		return config;
+	}
+
+	/**
+	 * Checks if the theme option exists otherwise sets gray theme.
+	 * @private
+	 */
+	_setTheme() {
+		if (!this._userOptions.theme) {
+			this._userOptions.theme = 'gray';
+		}
 	}
 
 	/**
