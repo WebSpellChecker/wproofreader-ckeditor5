@@ -6,7 +6,7 @@
 				commitOption: function (changedOptions, settings) {
 					if (typeof config.onCommitOptions === 'function') {
 						settings = settings || {};
-						!settings.ignoreCallback && config.onCommitOptions(instance, changedOptions);
+						!settings.ignoreCallback && config.onCommitOptions(changedOptions, instance);
 					}
 				}
 			};

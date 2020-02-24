@@ -156,7 +156,7 @@ export default class WProofreader extends Plugin {
 	 * Handles the {@code commitOptions} behavior of the {@code WEBSPELLCHECKER} instance.
 	 * @private
 	 */
-	_onCommitOptions(inst, changedOptions) {
+	_onCommitOptions(changedOptions) {
 		this._syncOptions(changedOptions);
 	}
 
