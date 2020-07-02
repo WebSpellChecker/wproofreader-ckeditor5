@@ -3,6 +3,7 @@ import WProofreader from '../src/wproofreader';
 import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing';
+import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing';
 
 describe('WProofreader', () => {
 	let element;
@@ -164,6 +165,20 @@ describe('WProofreader', () => {
 				});
 		});
 
+		it('should disable the dialog option of the WEBSPELLCHECKER because of RealTimeCollaborationClient plugin', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader, RealTimeCollaborationClient],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(editor.plugins.has('RealTimeCollaborationClient')).to.be.true;
+					expect(wproofreader._options.disableDialog).to.be.true;
+				});
+		});
+
 		it('should disable the dialog option of the WEBSPELLCHECKER because of collaboration plugins', () => {
 			return ClassicEditor
 				.create(element, {
@@ -171,7 +186,8 @@ describe('WProofreader', () => {
 						WProofreader,
 						RealTimeCollaborativeEditing,
 						RealTimeCollaborativeTrackChanges,
-						RealTimeCollaborativeComments
+						RealTimeCollaborativeComments,
+						RealTimeCollaborationClient
 					],
 					wproofreader: WPROOFREADER_CONFIG
 				})
@@ -181,6 +197,7 @@ describe('WProofreader', () => {
 					expect(editor.plugins.has('RealTimeCollaborativeEditing')).to.be.true;
 					expect(editor.plugins.has('RealTimeCollaborativeTrackChanges')).to.be.true;
 					expect(editor.plugins.has('RealTimeCollaborativeComments')).to.be.true;
+					expect(editor.plugins.has('RealTimeCollaborationClient')).to.be.true;
 					expect(wproofreader._options.disableDialog).to.be.true;
 				});
 		});

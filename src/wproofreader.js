@@ -21,7 +21,8 @@ export default class WProofreader extends Plugin {
 		this._collaborationPluginNames = [
 			'RealTimeCollaborativeEditing',
 			'RealTimeCollaborativeTrackChanges',
-			'RealTimeCollaborativeComments'
+			'RealTimeCollaborativeComments',
+			'RealTimeCollaborationClient'
 		];
 
 		this._userOptions = this._getUserOptions();

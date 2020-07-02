@@ -32,3 +32,14 @@ export class RealTimeCollaborativeComments extends Plugin {
 
 	destroy() { }
 }
+
+export class RealTimeCollaborationClient extends Plugin {
+
+	static get pluginName() {
+		return 'RealTimeCollaborationClient';
+	}
+
+	init() { }
+
+	destroy() { }
+}
