@@ -69,7 +69,7 @@ describe('WProofreader', () => {
 	});
 
 	describe('with theme option', () => {
-		it('should set gray theme', () => {
+		it('should set ckeditor5 theme', () => {
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
@@ -78,7 +78,7 @@ describe('WProofreader', () => {
 				.then((editor) => {
 					const wproofreader = editor.plugins.get('WProofreader');
 
-					expect(wproofreader._userOptions.theme).to.be.equal('gray');
+					expect(wproofreader._userOptions.theme).to.be.equal('ckeditor5');
 				})
 		});
 

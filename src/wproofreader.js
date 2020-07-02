@@ -64,12 +64,12 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Checks if the theme option exists otherwise sets gray theme.
+	 * Checks if the theme option exists otherwise sets ckeditor5 theme.
 	 * @private
 	 */
 	_setTheme() {
 		if (!this._userOptions.theme) {
-			this._userOptions.theme = 'gray';
+			this._userOptions.theme = 'ckeditor5';
 		}
 	}
 
