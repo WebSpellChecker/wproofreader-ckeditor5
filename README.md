@@ -1,4 +1,4 @@
-Proofreader feature for CKEditor 5
+WProofreader plugin for CKEditor 5
 ===================================
 
 The ultimate spelling and grammar checking tool for your web app. It provides both instant and in a dialog proofreading modes in a convenient UI.
