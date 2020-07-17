@@ -27,9 +27,9 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 2. Add a new plugin and its configuration to CKEditor.
 
-Set the WProofreader configuration data into the `wproofreader` field of the CKEditor 5 config. All available options are described in [API docs](https://webspellchecker.com/docs/api/wscbundle/Options.html).
+	Set the WProofreader configuration data into the `wproofreader` field of the CKEditor 5 config. All available options are described in [API docs](https://webspellchecker.com/docs/api/wscbundle/Options.html).
 
-For the Cloud-based version of WProofreader:
+	For the Cloud-based version of WProofreader:
 
 	```js
 	import WProofreader from 'wproofreader-ckeditor5';
@@ -45,9 +45,9 @@ For the Cloud-based version of WProofreader:
 		})
 	```
 
-`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
+	`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
 
-For the Server-based version of WProofreader:
+	For the Server-based version of WProofreader:
 
 	```js
 	import WProofreader from 'wproofreader-ckeditor5';
@@ -66,7 +66,7 @@ For the Server-based version of WProofreader:
 		})
 	```
 
-Unlike the Cloud-based version, the `serviceId` parameter is not used here. `Instead, it is required to specify the path to the back-end hosted on the client’s end.`
+	Unlike the Cloud-based version, the `serviceId` parameter is not used here. `Instead, it is required to specify the path to the back-end hosted on the client’s end.`
 
 ## Documentation
 
