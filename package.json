@@ -1,6 +1,6 @@
 {
   "name": "wproofreader-ckeditor5",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Proofreader feature for CKEditor 5.",
   "repository": {
     "type": "git",
