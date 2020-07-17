@@ -15,7 +15,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 * [Documentation](#documentation)
 * [Reporting issues](#reporting-issues)
 * [Technical support or questions](#technical-support-or-questions)
-* [License](license)
+* [License](#license)
 
 ## Install instructions
 
