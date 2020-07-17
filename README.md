@@ -4,6 +4,8 @@ WProofreader plugin for CKEditor 5
 The ultimate spelling and grammar checking tool for your web app. It provides both instant and in a dialog proofreading modes in a convenient UI.
 This package implements proofreader support for CKEditor 5.
 
+![WProofreader plugin for CKEditor 5 View](https://webspellchecker.com/app/images/wproofreader_plugin_for_ckeditor5.png)
+
 The multilingual spelling and grammar checking solution for CKEditor 5. It provides both instant and in dialog proofreading modes in a convenient UI. 
 WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreader component with slight adaptation to the view and features of the editor. For more details, visit the [WProofreader repo](https://github.com/WebSpellChecker/wproofreader) or [official web page](https://webspellchecker.com/wsc-proofreader/).
 
@@ -29,7 +31,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	Set the WProofreader configuration data into the `wproofreader` field of the CKEditor 5 config. All available options are described in [API docs](https://webspellchecker.com/docs/api/wscbundle/Options.html).
 
-	For the Cloud-based version of WProofreader:
+	For the **Cloud-based** version of WProofreader:
 
 	```js
 	import WProofreader from 'wproofreader-ckeditor5';
@@ -47,7 +49,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
 
-	For the Server-based version of WProofreader:
+	For the **Server-based** version of WProofreader:
 
 	```js
 	import WProofreader from 'wproofreader-ckeditor5';
@@ -66,7 +68,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 		})
 	```
 
-	Unlike the Cloud-based version, the `serviceId` parameter is not used here. `Instead, it is required to specify the path to the back-end hosted on the client’s end.`
+	Unlike the Cloud-based version, the `serviceId` parameter is not used here. **Instead, it is required to specify the path to the back-end hosted on the client’s end.**
 
 ## Documentation
 
