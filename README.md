@@ -16,8 +16,6 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 * [Reporting issues](#reporting-issues)
 * [Technical support or questions](#technical-support-or-questions)
 * [License](license)
-* [Terms of Service](terms-of-service)
-* [Software License Agreement](software-license-agreement)
 
 ## Install instructions
 
@@ -93,11 +91,3 @@ Holders of an active subscription to the services or a commercial license have a
 In order to use WProofreader plugin for CKEditor 5, you have to purchase a license accordingly. You can find more about that on our website on the [pricing plan page](https://webspellchecker.com/pricing/) or by contacting our [sales team](https://webspellchecker.com/contact-us/).
 
 You can start with an evaluation license first and see how the product works. [Request a free trial here](https://webspellchecker.com/free-trial/).
-
-## Terms of Service
-
-If you are choosing the Cloud-based version of WProofreader, please refer to [Terms of Service](https://webspellchecker.com/legal/terms-of-service/).
-
-## Software License Agreement
-
-If you are looking for a self-hosted license of WProofreader Server, please check here the complete [terms and conditions](https://docs.webspellchecker.net/display/Legal/WebSpellChecker+Software+License+Agreement) for downloading, installing and using the Server version of the WebSpellChecker software.
