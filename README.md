@@ -1,12 +1,10 @@
 WProofreader plugin for CKEditor 5
 ===================================
 
-The ultimate spelling and grammar checking tool for your web app. It provides both instant and in a dialog proofreading modes in a convenient UI.
-This package implements proofreader support for CKEditor 5.
+The multilingual spelling and grammar checking solution for CKEditor 5. It provides both instant and in dialog proofreading modes in a convenient UI.
 
 ![WProofreader plugin for CKEditor 5 View](https://webspellchecker.com/app/images/wproofreader_plugin_for_ckeditor5.png)
 
-The multilingual spelling and grammar checking solution for CKEditor 5. It provides both instant and in dialog proofreading modes in a convenient UI. 
 WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreader component with slight adaptation to the view and features of the editor. For more details, visit the [WProofreader repo](https://github.com/WebSpellChecker/wproofreader) or [official web page](https://webspellchecker.com/wsc-proofreader/).
 
 ## Table of contents
@@ -22,7 +20,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 1. Install the npm module.
 
 	```
-	npm install wproofreader-ckeditor5
+	npm install @webspellchecker/wproofreader-ckeditor5
 	```
 
 2. Add a new plugin and its configuration to CKEditor.
@@ -32,7 +30,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 	For the **Cloud-based** version of WProofreader:
 
 	```js
-	import WProofreader from 'wproofreader-ckeditor5';
+	import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
 	...
 
 	ClassicEditor
@@ -50,7 +48,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 	For the **Server-based** version of WProofreader:
 
 	```js
-	import WProofreader from 'wproofreader-ckeditor5';
+	import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
 	...
 
 	ClassicEditor
@@ -88,6 +86,4 @@ Holders of an active subscription to the services or a commercial license have a
 
 ## License
 
-In order to use WProofreader plugin for CKEditor 5, you have to purchase a license accordingly. You can find more about that on our website on the [pricing plan page](https://webspellchecker.com/pricing/) or by contacting our [sales team](https://webspellchecker.com/contact-us/).
-
-You can start with an evaluation license first and see how the product works. [Request a free trial here](https://webspellchecker.com/free-trial/).
+Licensed under the terms of MIT license. For full details about the license, please check the `LICENSE.md` file.
