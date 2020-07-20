@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 1.0.1 – 2020-07-20
+
+Internal changes only (updated dependencies, documentation, etc.).
+
 ## 1.0.0 – 2020-07-17
 
 This is a pilot version of the WProofreader plugin for CKEditor 5. The main differences between plugin and classic WProofreader are:

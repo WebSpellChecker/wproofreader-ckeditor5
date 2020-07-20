@@ -1,6 +1,6 @@
 {
   "name": "@webspellchecker/wproofreader-ckeditor5",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Multilingual spelling and grammar checking plugin for CKEditor 5",
   "repository": {
     "type": "git",
@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme",
   "license": "MIT",
+  "files": [
+    "lang",
+    "src",
+    "theme"
+  ],
   "keywords": [
     "spelling check",
     "gramar checking",
