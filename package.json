@@ -1,6 +1,6 @@
 {
   "name": "@webspellchecker/wproofreader-ckeditor5",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Multilingual spelling and grammar checking plugin for CKEditor 5",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-tests": "^17.1.0",
+    "@ckeditor/ckeditor5-dev-tests": ">=16.0.0",
     "concurrently": "^5.0.2",
     "eslint": "^6.8.0",
     "http-server": "^0.12.1",
@@ -43,13 +43,13 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^16.0.0",
-    "@ckeditor/ckeditor5-dev-utils": "^12.0.5",
-    "@ckeditor/ckeditor5-editor-classic": "^16.0.0",
-    "@ckeditor/ckeditor5-essentials": "^16.0.0",
-    "@ckeditor/ckeditor5-heading": "^16.0.0",
-    "@ckeditor/ckeditor5-list": "^16.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^16.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^16.0.0"
+    "@ckeditor/ckeditor5-basic-styles": ">=16.0.0",
+    "@ckeditor/ckeditor5-dev-utils": ">=16.0.0",
+    "@ckeditor/ckeditor5-editor-classic": ">=16.0.0",
+    "@ckeditor/ckeditor5-essentials": ">=16.0.0",
+    "@ckeditor/ckeditor5-heading": ">=16.0.0",
+    "@ckeditor/ckeditor5-list": ">=16.0.0",
+    "@ckeditor/ckeditor5-paragraph": ">=16.0.0",
+    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0"
   }
 }
