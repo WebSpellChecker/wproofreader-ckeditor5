@@ -1,0 +1,121 @@
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { addListToDropdown, createDropdown } from '@ckeditor/ckeditor5-ui/src/dropdown/utils';
+import Collection from '@ckeditor/ckeditor5-utils/src/collection';
+import Model from '@ckeditor/ckeditor5-ui/src/model';
+import wproofreaderIcon from '../theme/icons/wproofreader.svg';
+import '../theme/wproofreader.css';
+
+/**
+ * The {@code WProofreaderUI} plugin.
+ */
+export default class WProofreaderUI extends Plugin {
+	/**
+	 * @inheritDoc
+	 */
+	static get pluginName() {
+		return 'WProofreaderUI';
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	constructor(editor) {
+		super(editor);
+
+		this._commands = {
+			toggle: 'WProofreaderToggle',
+			settings: 'WProofreaderSettings',
+			proofreadDialog: 'WProofreaderDialog'
+		};
+	}
+
+	/**
+	 * Initializes the {@code WProofreaderUI} plugin.
+	 * @public
+	 */
+	init() {
+		this._registerDropdown();
+	}
+
+	/**
+	 * Registers the {@code WProofreader} dropdown among the UI components of the editor.
+	 * @public
+	 */
+	_registerDropdown() {
+		const editor = this.editor;
+		const wproofreader = editor.plugins.get('WProofreader');
+
+		editor.ui.componentFactory.add('wproofreader', locale => {
+			const dropdownView = createDropdown(locale);
+			let dropdownItemsDefinitions, actions;
+
+			dropdownView.buttonView.set({
+				label: 'WProofreader',
+				icon: wproofreaderIcon,
+				tooltip: true
+			});
+
+			dropdownView.on('change:isOpen', (evt) => {
+				const ready = wproofreader.isInstancesReady();
+				const enabled = wproofreader.isInstancesEnabled();
+
+				if (!ready) {
+					dropdownView.class = 'ck-wproofreader-empty';
+
+					return;
+				}
+
+				if (!dropdownItemsDefinitions) {
+					actions = wproofreader.getStaticActions();
+					dropdownItemsDefinitions = this._getDropdownItemsDefinitions(actions);
+
+					addListToDropdown(dropdownView, dropdownItemsDefinitions);
+				}
+
+				dropdownView.class = '';
+
+				dropdownItemsDefinitions.map((item) => {
+					item.model.class = enabled ? '' : 'ck-hidden';
+
+					if (item.model.commandParam === 'WProofreaderToggle') {
+						item.model.label = enabled ? item.model.localization.disable : item.model.localization.enable;
+						item.model.class = '';
+					}
+				});
+			});
+
+			// Execute the command when the dropdown item is clicked (executed).
+			dropdownView.on('execute', (evt) => {
+				editor.execute(evt.source.commandParam);
+			});
+
+			return dropdownView;
+		});
+	}
+
+	/**
+	 * Creates dropdown items for the {@code WProofreader} actions.
+	 * @public
+	 */
+	_getDropdownItemsDefinitions(actions) {
+		const itemDefinitions = new Collection();
+
+		actions.forEach(action => {
+			const definition = {
+				type: 'button',
+				model: new Model({
+					commandParam: this._commands[action.name],
+					label: action.localization.default,
+					localization: action.localization,
+					class: '',
+					withText: true
+				})
+			};
+
+			// Add the item definition to the collection.
+			itemDefinitions.add(definition);
+		})
+
+		return itemDefinitions;
+	}
+}
