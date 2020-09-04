@@ -1,5 +1,7 @@
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import WProofreader from '../src/wproofreader';
+import WProofreaderEditing from '../src/wproofreaderediting';
+import WProofreaderUI from '../src/wproofreaderui';
 import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing';
@@ -31,6 +33,7 @@ describe('WProofreader', () => {
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
+					toolbar: ['wproofreader'],
 					wproofreader: WPROOFREADER_CONFIG
 				})
 				.then((editor) => {
@@ -50,6 +53,10 @@ describe('WProofreader', () => {
 			expect(wproofreader).to.be.instanceOf(WProofreader);
 		});
 
+		it('should require WProofreaderEditing and WProofreaderUI', () => {
+			expect(WProofreader.requires).to.deep.equal([WProofreaderEditing, WProofreaderUI]);
+		});
+
 		it('should contain wproofreader option', () => {
 			expect(wproofreader).to.have.property('_userOptions');
 		});
@@ -65,6 +72,14 @@ describe('WProofreader', () => {
 
 		it('should not disable dialog option', () => {
 			expect(wproofreader._options.disableDialog).to.be.false;
+		});
+
+		it('should hide static actions', () => {
+			expect(wproofreader._options.hideStaticActions).to.be.true;
+		});
+
+		it('should disable badge pulsing', () => {
+			expect(wproofreader._options.disableBadgePulsing).to.be.true;
 		});
 	});
 
@@ -331,4 +346,165 @@ describe('WProofreader', () => {
 			});
 		});
 	});
+
+	describe('public API', () => {
+		let testEditor, wproofreader;
+
+		beforeEach(() => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					testEditor = editor;
+					wproofreader = testEditor.plugins.get('WProofreader');
+				});
+		});
+
+		afterEach(() => {
+			wproofreader = null;
+
+			return testEditor.destroy();
+		});
+
+		describe('getStaticActions method', () => {
+			it('should return empty static actions if WEBSPELLCHECKER instances are not ready', () => {
+				wproofreader._tempInstances = wproofreader._instances;
+				wproofreader._instances = [];
+
+				expect(wproofreader.getStaticActions().length).to.be.equal(0);
+
+				wproofreader._instances = wproofreader._tempInstances;
+				wproofreader._tempInstances = null;
+			});
+
+			it('should return static actions', () => {
+				const actions = wproofreader.getStaticActions();
+
+				expect(actions.length).to.be.equal(3);
+
+				expect(actions[0].name).to.be.equal('toggle');
+				expect(typeof actions[0].localization.default).to.be.equal('string');
+				expect(typeof actions[0].localization.enable).to.be.equal('string');
+				expect(typeof actions[0].localization.disable).to.be.equal('string');
+
+				expect(actions[1].name).to.be.equal('settings');
+				expect(typeof actions[1].localization.default).to.be.equal('string');
+				expect(actions[1].localization.enable).to.be.undefined;
+				expect(actions[1].localization.disable).to.be.undefined;
+
+				expect(actions[2].name).to.be.equal('proofreadDialog');
+				expect(typeof actions[2].localization.default).to.be.equal('string');
+				expect(actions[2].localization.enable).to.be.undefined;
+				expect(actions[2].localization.disable).to.be.undefined;
+			});
+		});
+
+		describe('toggle method', () => {
+			it('should disable WEBSPELLCHECKER instances', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'disable');
+
+				wproofreader.toggle();
+
+				sinon.assert.calledOnce(spy);
+			});
+
+			it('should enable WEBSPELLCHECKER instances', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'enable');
+
+				wproofreader._instances[0].disabled = true;
+
+				wproofreader.toggle();
+
+				sinon.assert.calledOnce(spy);
+			});
+		});
+
+		describe('openSettings method', () => {
+			it('should not open settings', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'openSettings');
+
+				wproofreader._tempInstances = wproofreader._instances;
+				wproofreader._instances = [];
+
+				wproofreader.openSettings();
+
+				sinon.assert.notCalled(spy);
+
+				wproofreader._instances = wproofreader._tempInstances;
+				wproofreader._tempInstances = null;
+			});
+
+			it('should open settings', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'openSettings');
+
+				wproofreader.openSettings();
+
+				sinon.assert.calledOnce(spy);
+			});
+		});
+
+		describe('openDialog method', () => {
+			it('should not open dialog', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'openDialog');
+
+				wproofreader._tempInstances = wproofreader._instances;
+				wproofreader._instances = [];
+
+				wproofreader.openDialog();
+
+				sinon.assert.notCalled(spy);
+
+				wproofreader._instances = wproofreader._tempInstances;
+				wproofreader._tempInstances = null;
+			});
+
+			it('should open dialog', () => {
+				const spy = sinon.spy(wproofreader._instances[0], 'openDialog');
+
+				wproofreader.openDialog();
+
+				sinon.assert.calledOnce(spy);
+			});
+		});
+
+		describe('isInstancesReady method', () => {
+			it('should check if instances are not ready', () => {
+				wproofreader._tempInstances = wproofreader._instances;
+				wproofreader._instances = [];
+
+				expect(wproofreader.isInstancesReady()).to.be.false;
+
+				wproofreader._instances = wproofreader._tempInstances;
+				wproofreader._tempInstances = null;
+			});
+
+			it('should check if instances are ready', () => {
+				expect(wproofreader.isInstancesReady()).to.be.true;
+			});
+		});
+
+		describe('isInstancesEnabled method', () => {
+			it('should check if instances are disabled because they are not ready', () => {
+				wproofreader._tempInstances = wproofreader._instances;
+				wproofreader._instances = [];
+
+				expect(wproofreader.isInstancesEnabled()).to.be.false;
+
+				wproofreader._instances = wproofreader._tempInstances;
+				wproofreader._tempInstances = null;
+			});
+
+			it('should check if instances are enabled', () => {
+				expect(wproofreader.isInstancesEnabled()).to.be.true;
+			});
+
+			it('should check if instances are disabled', () => {
+				wproofreader._instances[0].disabled = true;
+
+				expect(wproofreader.isInstancesEnabled()).to.be.false;
+			});
+		});
+	})
 });
