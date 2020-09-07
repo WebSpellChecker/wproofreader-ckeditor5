@@ -4,7 +4,7 @@ import WProofreaderSettingsCommand from './wproofreadersettingscommand';
 import WProofreaderDialogCommand from './wproofreaderdialogcommand';
 
 /**
- * The {@code WProofreaderEditing} plugin.
+ * The {@code WProofreaderEditing} plugin. It introduces all {@code WProofreader} commands.
  */
 export default class WProofreaderEditing extends Plugin {
 	/**
