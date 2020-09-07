@@ -45,7 +45,7 @@ export default class WProofreaderUI extends Plugin {
 		const editor = this.editor;
 		const wproofreader = editor.plugins.get('WProofreader');
 
-		editor.ui.componentFactory.add('wproofreader', locale => {
+		editor.ui.componentFactory.add('wproofreader', (locale) => {
 			const dropdownView = createDropdown(locale);
 			let dropdownItemsDefinitions, actions;
 
@@ -100,7 +100,7 @@ export default class WProofreaderUI extends Plugin {
 	_getDropdownItemsDefinitions(actions) {
 		const itemDefinitions = new Collection();
 
-		actions.forEach(action => {
+		actions.forEach((action) => {
 			const definition = {
 				type: 'button',
 				model: new Model({
