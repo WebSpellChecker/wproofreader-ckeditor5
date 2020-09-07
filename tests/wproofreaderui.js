@@ -6,7 +6,6 @@ import WProofreaderUI from '../src/wproofreaderui';
 import wproofreaderIcon from '../theme/icons/wproofreader.svg';
 
 describe('WProofreaderUI', () => {
-	let element, wproofreader, wproofreaderUI, testEditor;
 	const WPROOFREADER_CONFIG = {
 		serviceProtocol: 'http',
 		serviceHost: 'localhost',
@@ -14,6 +13,8 @@ describe('WProofreaderUI', () => {
 		servicePath: '/',
 		srcUrl: 'http://localhost:3000/tests/mocks/mock-wscbundle.js'
 	};
+
+	let element, wproofreader, wproofreaderUI, testEditor;
 
 	beforeEach(() => {
 		element = document.createElement('div');

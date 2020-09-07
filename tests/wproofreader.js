@@ -8,7 +8,6 @@ import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editin
 import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing';
 
 describe('WProofreader', () => {
-	let element;
 	const WPROOFREADER_CONFIG = {
 		serviceProtocol: 'http',
 		serviceHost: 'localhost',
@@ -16,6 +15,8 @@ describe('WProofreader', () => {
 		servicePath: '/',
 		srcUrl: 'http://localhost:3000/tests/mocks/mock-wscbundle.js'
 	};
+
+	let element;
 
 	beforeEach(() => {
 		element = document.createElement('div');

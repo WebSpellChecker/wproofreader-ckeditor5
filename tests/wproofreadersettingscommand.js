@@ -4,7 +4,6 @@ import WProofreader from '../src/wproofreader';
 import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand';
 
 describe('WProofreaderSettingsCommand', () => {
-	let element, testEditor, wproofreader, wproofreaderSettings;
 	const WPROOFREADER_CONFIG = {
 		serviceProtocol: 'http',
 		serviceHost: 'localhost',
@@ -12,6 +11,8 @@ describe('WProofreaderSettingsCommand', () => {
 		servicePath: '/',
 		srcUrl: 'http://localhost:3000/tests/mocks/mock-wscbundle.js'
 	};
+
+	let element, testEditor, wproofreader, wproofreaderSettings;
 
 	beforeEach(() => {
 		element = document.createElement('div');
