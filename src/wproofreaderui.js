@@ -6,7 +6,7 @@ import wproofreaderIcon from '../theme/icons/wproofreader.svg';
 import '../theme/wproofreader.css';
 
 /**
- * The {@code WProofreaderUI} plugin.
+ * The {@code WProofreaderUI} plugin. It introduces the {@code WProofreader} toolbar button.
  */
 export default class WProofreaderUI extends Plugin {
 	/**
