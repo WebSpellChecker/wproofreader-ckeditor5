@@ -39,7 +39,7 @@ export default class WProofreaderUI extends Plugin {
 
 	/**
 	 * Registers the {@code WProofreader} dropdown among the UI components of the editor.
-	 * @public
+	 * @private
 	 */
 	_registerDropdown() {
 		const editor = this.editor;
@@ -95,7 +95,7 @@ export default class WProofreaderUI extends Plugin {
 
 	/**
 	 * Creates dropdown items for the {@code WProofreader} actions.
-	 * @public
+	 * @private
 	 */
 	_getDropdownItemsDefinitions(actions) {
 		const itemDefinitions = new Collection();
