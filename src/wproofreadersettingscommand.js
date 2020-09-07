@@ -1,7 +1,7 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
 /**
- * The {@code WProofreaderSettingsCommand}.
+ * The {@code WProofreaderSettingsCommand} to open the {@code WProofreader} settings.
  */
 export default class WProofreaderSettingsCommand extends Command {
 	/**

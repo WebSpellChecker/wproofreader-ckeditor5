@@ -1,7 +1,7 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
 /**
- * The {@code WProofreaderToggleCommand}.
+ * The {@code WProofreaderToggleCommand} to toggle the {@code WProofreader}.
  */
 export default class WProofreaderToggleCommand extends Command {
 	/**

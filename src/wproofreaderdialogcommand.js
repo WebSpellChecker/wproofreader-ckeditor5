@@ -1,7 +1,7 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 
 /**
- * The {@code WProofreaderDialogCommand}.
+ * The {@code WProofreaderDialogCommand} to open the {@code WProofreader} dialog.
  */
 export default class WProofreaderDialogCommand extends Command {
 	/**
