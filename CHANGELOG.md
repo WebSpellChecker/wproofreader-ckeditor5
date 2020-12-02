@@ -1,5 +1,11 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 1.0.6 – 2020-12-02
+
+### Bug fixes
+
+* Destroying the CKEditor before it is completely created causes the plugin to fail. [#13](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/13).
+
 ## 1.0.5 – 2020-07-31
 
 Internal changes only (updated dependencies, documentation, etc.).
