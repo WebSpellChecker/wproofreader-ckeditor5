@@ -176,7 +176,7 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_createInstance(root) {
-		WEBSPELLCHECKER.init(this._mergeOptions(root), this._saveInstance.bind(this));
+		WEBSPELLCHECKER.init(this._mergeOptions(root), this._handleInstanceCreated.bind(this));
 	}
 
 	/**
@@ -188,13 +188,21 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Saves instance of the {@code WEBSPELLCHECKER}.
+	 * Handles a state when an instance of the {@code WEBSPELLCHECKER} completely created.
 	 * @private
 	 */
-	_saveInstance(instance) {
-		if (instance) {
-			this._instances.push(instance);
+	_handleInstanceCreated(instance) {
+		if (!instance) {
+			return;
 		}
+
+		if (this.editor.state === 'destroyed') {
+			instance.destroy();
+
+			return;
+		}
+
+		this._instances.push(instance);
 	}
 
 	/**
