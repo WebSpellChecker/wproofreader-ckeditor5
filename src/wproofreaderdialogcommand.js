@@ -7,6 +7,7 @@ export default class WProofreaderDialogCommand extends Command {
 	/**
 	 * Executes the {@code WProofreaderDialogCommand}.
 	 * @public
+	 * @inheritDoc
 	 */
 	execute(options = {}) {
 		const wproofreader = this.editor.plugins.get('WProofreader');

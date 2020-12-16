@@ -7,6 +7,7 @@ export default class WProofreaderToggleCommand extends Command {
 	/**
 	 * Executes the {@code WProofreaderToggleCommand}.
 	 * @public
+	 * @inheritDoc
 	 */
 	execute(options = {}) {
 		const wproofreader = this.editor.plugins.get('WProofreader');
