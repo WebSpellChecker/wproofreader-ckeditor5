@@ -36,6 +36,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 	ClassicEditor
 		.create( editorElement, {
 			plugins: [ ..., WProofreader],
+			toolbar: [ ..., 'wproofreader'],
 			wproofreader: {
 				serviceId: 'your-service-ID',
 				srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
@@ -54,6 +55,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 	ClassicEditor
 		.create( editorElement, {
 			plugins: [ ..., WProofreader],
+			toolbar: [ ..., 'wproofreader'],
 			wproofreader: {
 				serviceProtocol: 'https',
 				serviceHost: 'localhost',

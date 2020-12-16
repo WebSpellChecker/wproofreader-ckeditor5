@@ -1,4 +1,6 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import WProofreaderEditing from './wproofreaderediting';
+import WProofreaderUI from './wproofreaderui';
 import { ScriptLoader } from './utils/script-loader';
 
 /**
@@ -8,8 +10,31 @@ export default class WProofreader extends Plugin {
 	/**
 	 * @inheritdoc
 	 */
+	static get requires() {
+		return [WProofreaderEditing, WProofreaderUI];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	static get pluginName() {
 		return 'WProofreader';
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	constructor(editor) {
+		super(editor);
+
+		this._instances = [];
+
+		this._collaborationPluginNames = [
+			'RealTimeCollaborativeEditing',
+			'RealTimeCollaborativeTrackChanges',
+			'RealTimeCollaborativeComments',
+			'RealTimeCollaborationClient'
+		];
 	}
 
 	/**
@@ -17,14 +42,6 @@ export default class WProofreader extends Plugin {
 	 * @public
 	 */
 	init() {
-		this._instances = [];
-		this._collaborationPluginNames = [
-			'RealTimeCollaborativeEditing',
-			'RealTimeCollaborativeTrackChanges',
-			'RealTimeCollaborativeComments',
-			'RealTimeCollaborationClient'
-		];
-
 		this._userOptions = this._getUserOptions();
 		this._setTheme();
 
@@ -142,13 +159,15 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Creates {@code WEBSPELLCHECKER} specific options.
+	 * Creates options for the {@code WEBSPELLCHECKER} initialization.
 	 * @private
 	 */
 	_createOptions() {
 		return {
 			appType: 'proofreader_ck5',
 			disableDialog: this._isMultiRoot || this._isCollaboration,
+			hideStaticActions: true,
+			disableBadgePulsing: true,
 			onCommitOptions: this._onCommitOptions.bind(this)
 		};
 	}
@@ -184,7 +203,7 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_mergeOptions(container) {
-		return Object.assign(this._userOptions, this._options, { container: container });
+		return Object.assign({}, this._userOptions, this._options, { container: container });
 	}
 
 	/**
@@ -213,5 +232,77 @@ export default class WProofreader extends Plugin {
 		this.editor.on('ready', () => {
 			this._createInstances();
 		});
+	}
+
+	/**
+	 * Returns available static actions of the {@code WEBSPELLCHECKER}.
+	 * @public
+	 *
+	 * @returns {Array} Static actions.
+	 */
+	getStaticActions() {
+		if (this._instances.length === 0) {
+			return [];
+		}
+
+		return this._instances[0].getStaticActions();
+	}
+
+	/**
+	 * Toggles instances state of the {@code WEBSPELLCHECKER}.
+	 * @public
+	 */
+	toggle() {
+		this._instances.forEach((instance) => {
+			instance.isDisabled() ? instance.enable() : instance.disable();
+		});
+	}
+
+	/**
+	 * Opens settings of the {@code WEBSPELLCHECKER}.
+	 * @public
+	 */
+	openSettings() {
+		if (this._instances.length === 0) {
+			return;
+		}
+
+		this._instances[0].openSettings();
+	}
+
+	/**
+	 * Opens the proofread Dialog of the {@code WEBSPELLCHECKER}.
+	 * @public
+	 */
+	openDialog() {
+		if (this._instances.length === 0) {
+			return;
+		}
+
+		this._instances[0].openDialog();
+	}
+
+	/**
+	 * Indicates that instances of the {@code WEBSPELLCHECKER} are ready to use.
+	 * @public
+	 *
+	 * @returns {Boolean} {@code true} if instances are ready, {@code false} otherwise.
+	 */
+	isInstancesReady() {
+		return this._instances.length > 0;
+	}
+
+	/**
+	 * Indicates that instances of the {@code WEBSPELLCHECKER} are enabled.
+	 * @public
+	 *
+	 * @returns {Boolean} {@code true} if instances are enabled, {@code false} otherwise.
+	 */
+	isInstancesEnabled() {
+		if (this._instances.length === 0) {
+			return false;
+		}
+
+		return !this._instances[0].isDisabled();
 	}
 }
