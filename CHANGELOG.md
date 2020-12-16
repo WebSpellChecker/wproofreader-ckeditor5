@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.0.1 – 2020-12-16
+
+Internal changes only (updated dependencies, documentation, etc.).
+
 ## 2.0.0 – 2020-12-16
 
 * Added a WProofreader button with a dropdown menu to the CKEditor 5 toolbar where users can access settings, open proofread in dialog mode or turn the functionality on/off. All those action items were moved from the floating badge.
