@@ -1,5 +1,13 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.0.0 – 2020-12-16
+
+* Added a WProofreader button with a dropdown menu to the CKEditor 5 toolbar where users can access settings, open proofread in dialog mode or turn the functionality on/off. All those action items were moved from the floating badge.
+* The badge is kept there to indicate a number of errors found and show the progress of text checking (loader). If the plugin is in the disabled state (off), the badge will be hidden.
+* Implemented synchronization of the plugin state in the case of the CKEditor 5 multi-root mode.
+
+The new version of the plugin is compatible with [WebSpellChecker v5.8.0](https://webspellchecker.com/release-notes/v5-8-0/) and higher.
+
 ## 1.0.6 – 2020-12-02
 
 ### Bug fixes

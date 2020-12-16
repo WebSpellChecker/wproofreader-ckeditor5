@@ -10,7 +10,7 @@ import WProofreader from '../src/wproofreader';
 ClassicEditor
 	.create(document.querySelector('#editor'), {
 		plugins: [Essentials, Paragraph, Heading, List, Bold, Italic, WProofreader],
-		toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList'],
+		toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList', 'wproofreader'],
 		wproofreader: {
 			serviceProtocol: 'http',
 			serviceHost: 'localhost',
