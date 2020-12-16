@@ -47,6 +47,7 @@ export default class WProofreaderUI extends Plugin {
 
 		editor.ui.componentFactory.add('wproofreader', (locale) => {
 			const dropdownView = createDropdown(locale);
+
 			let dropdownItemsDefinitions, actions;
 
 			dropdownView.buttonView.set({
