@@ -346,6 +346,89 @@ describe('WProofreader', () => {
 					});
 			});
 		});
+
+		describe('should synchronize WEBSPELLCHECKER toggle state in the editor with', () => {
+			let editor;
+
+			beforeEach(() => {
+				return editor = new ClassicEditor(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				});
+			});
+
+			afterEach(() => {
+				return editor.destroy();
+			});
+
+			it('1 root', () => {
+				editor.editing.view.domRoots.set('main', element);
+
+				return editor.initPlugins()
+					.then(() => {
+						editor.ui.init(element);
+						editor.data.init(element);
+
+						editor.fire('ready');
+
+						return editor;
+					})
+					.then(() => {
+						const wproofreader = editor.plugins.get('WProofreader');
+
+						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
+						const spy = sinon.spy(wproofreader._instances[0], 'disable');
+
+						wproofreader._instances[0].disable();
+
+						expect(wproofreader._instances.length).to.be.equal(1);
+
+						// Checks that the spy was called twice because it was called manually once.
+						sinon.assert.calledTwice(spy);
+						sinon.assert.calledOnce(syncToggleSpy);
+					});
+			});
+
+			it('3 roots', () => {
+				editor.editing.view.domRoots.set('main', element);
+				editor.editing.view.domRoots.set('second', element);
+				editor.editing.view.domRoots.set('third', element);
+
+				return editor.initPlugins()
+					.then(() => {
+						editor.ui.init(element);
+						editor.data.init(element);
+
+						editor.fire('ready');
+
+						return editor;
+					})
+					.then(() => {
+						const wproofreader = editor.plugins.get('WProofreader');
+
+						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
+						const spies = [];
+
+						for (let i = 0; i < wproofreader._instances.length; i++) {
+							const spy = sinon.spy(wproofreader._instances[i], 'disable');
+							spies.push(spy);
+						}
+
+						wproofreader._instances[0].disable();
+
+						expect(spies.length).to.be.equal(3);
+
+						// Checks that the first spy was called twice because it was called manually once.
+						sinon.assert.calledTwice(spies[0]);
+
+						for (let i = 1; i < spies.length; i++) {
+							sinon.assert.calledOnce(spies[i]);
+						}
+
+						sinon.assert.calledOnce(syncToggleSpy);
+					});
+			});
+		});
 	});
 
 	describe('public API', () => {
@@ -405,20 +488,24 @@ describe('WProofreader', () => {
 		describe('toggle method', () => {
 			it('should disable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'disable');
+				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
+				sinon.assert.notCalled(syncToggleSpy);
 			});
 
 			it('should enable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'enable');
+				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader._instances[0].disabled = true;
 
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
+				sinon.assert.notCalled(syncToggleSpy);
 			});
 		});
 

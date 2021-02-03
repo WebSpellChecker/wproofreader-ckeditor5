@@ -168,7 +168,8 @@ export default class WProofreader extends Plugin {
 			disableDialog: this._isMultiRoot || this._isCollaboration,
 			hideStaticActions: true,
 			disableBadgePulsing: true,
-			onCommitOptions: this._onCommitOptions.bind(this)
+			onCommitOptions: this._onCommitOptions.bind(this),
+			onToggle: this._onToggle.bind(this)
 		};
 	}
 
@@ -187,6 +188,28 @@ export default class WProofreader extends Plugin {
 	_syncOptions(changedOptions) {
 		this._instances.forEach((instance) => {
 			instance.commitOption(changedOptions, { ignoreCallback: true });
+		});
+	}
+
+	/**
+	 * Handles the {@code toggle} behavior of the {@code WEBSPELLCHECKER} instance.
+	 * @private
+	 */
+	_onToggle(instance) {
+		const enable = !instance.isDisabled();
+
+		this._syncToggle(enable);
+	}
+
+	/**
+	 * Synchronizes the toggle state between the each instance of the {@code WEBSPELLCHECKER}.
+	 * @private
+	 */
+	_syncToggle(enable) {
+		const options = { ignoreCallback: true };
+
+		this._instances.forEach((instance) => {
+			enable ? instance.enable(options) : instance.disable(options);
 		});
 	}
 
@@ -253,8 +276,10 @@ export default class WProofreader extends Plugin {
 	 * @public
 	 */
 	toggle() {
+		const options = { ignoreCallback: true };
+
 		this._instances.forEach((instance) => {
-			instance.isDisabled() ? instance.enable() : instance.disable();
+			instance.isDisabled() ? instance.enable(options) : instance.disable(options);
 		});
 	}
 

@@ -37,8 +37,22 @@
 				isDisabled: function() {
 					return this.disabled;
 				},
-				enable: function() {},
-				disable: function() {},
+				enable: function(options) {
+					this.disabled = false;
+
+					if (typeof config.onToggle === 'function') {
+						options = options || {};
+						!options.ignoreCallback && config.onToggle(instance);
+					}
+				},
+				disable: function(options) {
+					this.disabled = true;
+
+					if (typeof config.onToggle === 'function') {
+						options = options || {};
+						!options.ignoreCallback && config.onToggle(instance);
+					}
+				},
 				openSettings: function() {},
 				openDialog: function() {}
 			};
