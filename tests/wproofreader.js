@@ -375,7 +375,6 @@ describe('WProofreader', () => {
 					})
 					.then(() => {
 						const wproofreader = editor.plugins.get('WProofreader');
-
 						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 						const spy = sinon.spy(wproofreader._instances[0], 'disable');
 
@@ -405,12 +404,12 @@ describe('WProofreader', () => {
 					})
 					.then(() => {
 						const wproofreader = editor.plugins.get('WProofreader');
-
 						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 						const spies = [];
 
 						for (let i = 0; i < wproofreader._instances.length; i++) {
 							const spy = sinon.spy(wproofreader._instances[i], 'disable');
+
 							spies.push(spy);
 						}
 
