@@ -182,7 +182,7 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Synchronizes the changed options between the each instance of the {@code WEBSPELLCHECKER}.
+	 * Synchronizes the changed options between each instance of the {@code WEBSPELLCHECKER}.
 	 * @private
 	 */
 	_syncOptions(changedOptions) {
@@ -202,7 +202,7 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Synchronizes the toggle state between the each instance of the {@code WEBSPELLCHECKER}.
+	 * Synchronizes the toggle state between each instance of the {@code WEBSPELLCHECKER}.
 	 * @private
 	 */
 	_syncToggle(enable) {
