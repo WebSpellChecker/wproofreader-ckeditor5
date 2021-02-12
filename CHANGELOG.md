@@ -1,5 +1,13 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.0.2 – 2021-02-12
+
+### Bug fixes
+
+* If the backend is unavailable for more than 5 requests, the instances states won't be synchronized. [#18](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/18).
+
+This fix is bundled with the release of [WebSpellChecker v5.10.0](https://webspellchecker.com/release-notes/v5-10-0/) and higher.
+
 ## 2.0.1 – 2020-12-16
 
 Internal changes only (updated dependencies, documentation, etc.).
