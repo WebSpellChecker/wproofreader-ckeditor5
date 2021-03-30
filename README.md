@@ -38,7 +38,8 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 			plugins: [ ..., WProofreader],
 			toolbar: [ ..., 'wproofreader'],
 			wproofreader: {
-				serviceId: 'your-service-ID',
+				lang: 'en_US', // sets the default language
+				serviceId: 'your-service-ID', // required for the Cloud version only
 				srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
 			}
 		})
@@ -57,6 +58,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 			plugins: [ ..., WProofreader],
 			toolbar: [ ..., 'wproofreader'],
 			wproofreader: {
+				lang: 'en_US', // sets the default language
 				serviceProtocol: 'https',
 				serviceHost: 'localhost',
 				servicePort: '2880',
