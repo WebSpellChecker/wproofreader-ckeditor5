@@ -58,6 +58,42 @@
 	</div>
 
 	<script src="../../dist/bundle.js"></script>
+
+	<script>
+		MultirootEditor
+			.create(
+				{
+					header: document.querySelector('#header'),
+					content: document.querySelector('#content'),
+					footerleft: document.querySelector('#footer-left'),
+					footerright: document.querySelector('#footer-right')
+				},
+				{
+					toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList', 'wproofreader'],
+					placeholder: {
+						header: 'Header text goes here',
+						content: 'Type content here',
+						footerleft: 'Left footer content',
+						footerright: 'Right footer content'
+					},
+					wproofreader: {
+						serviceProtocol: 'http',
+						serviceHost: 'localhost',
+						servicePort: '2880',
+						servicePath: '/',
+						srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
+					}
+				}
+			)
+			.then(newEditor => {
+				document.querySelector('#toolbar').appendChild(newEditor.ui.view.toolbar.element);
+
+				window.editor = newEditor;
+			})
+			.catch(err => {
+				console.error(err.stack);
+			});
+	</script>
 </body>
 
 </html>

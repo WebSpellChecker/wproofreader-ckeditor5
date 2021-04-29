@@ -7,8 +7,11 @@ module.exports = {
 	entry: './samples/app.js',
 
 	output: {
+		library: 'ClassicEditor',
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		libraryTarget: 'umd',
+		libraryExport: 'default'
 	},
 
 	module: {

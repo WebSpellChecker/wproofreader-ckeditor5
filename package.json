@@ -1,6 +1,6 @@
 {
   "name": "@webspellchecker/wproofreader-ckeditor5",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Multilingual spelling and grammar checking plugin for CKEditor 5",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack --mode development -w",
-    "build": "./node_modules/.bin/webpack --mode development",
+    "build": "./node_modules/.bin/webpack --mode production",
     "test": "concurrently --kill-others --success \"first\" \"node --max_old_space_size=4096 node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js -c --files=ckeditor5\" \"http-server -c-0 --cors -p 3000 -s\""
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
