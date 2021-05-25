@@ -3,9 +3,10 @@ import WProofreaderEditing from '../src/wproofreaderediting';
 import WProofreaderToggleCommand from '../src/wproofreadertogglecommand';
 import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand';
 import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand';
+import { TrackChanges } from './mocks/mock-track-changes-editing';
 
 describe('WProofreaderEditing', () => {
-	let element, wproofreaderEditing, testEditor;
+	let element, wproofreaderEditing, trackChangesEditing, testEditor;
 
 	beforeEach(() => {
 		element = document.createElement('div');
@@ -13,17 +14,19 @@ describe('WProofreaderEditing', () => {
 
 		return ClassicEditor
 			.create(element, {
-				plugins: [WProofreaderEditing]
+				plugins: [WProofreaderEditing, TrackChanges]
 			})
 			.then((editor) => {
 				testEditor = editor;
 				wproofreaderEditing = testEditor.plugins.get('WProofreaderEditing');
+				trackChangesEditing = testEditor.plugins.get('TrackChangesEditing');
 			});
 	});
 
 	afterEach(() => {
 		element.remove();
 		wproofreaderEditing = null;
+		trackChangesEditing = null;
 
 		return testEditor.destroy();
 	});
@@ -43,5 +46,9 @@ describe('WProofreaderEditing', () => {
 
 	it('should add WProofreaderDialogCommand command', () => {
 		expect(testEditor.commands.get('WProofreaderDialog')).to.be.instanceOf(WProofreaderDialogCommand);
+	});
+
+	it('should enable WProofreader commands in the Track Changes mode', () => {
+		expect(trackChangesEditing.counter).to.be.equal(3);
 	});
 });

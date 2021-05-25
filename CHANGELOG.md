@@ -1,5 +1,11 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.0.5 – 2020-05-25
+
+### Bug fixes
+
+* WProofreader UI can't be opened if the tracking changes mode is toggled on. [#27](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/27).
+
 ## 2.0.4 – 2021-04-29
 
 Internal changes only (updated dependencies, documentation, etc.).
