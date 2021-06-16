@@ -61,8 +61,8 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 				lang: 'en_US', // sets the default language
 				serviceProtocol: 'https',
 				serviceHost: 'localhost',
-				servicePort: '2880',
-				servicePath: '/',
+				servicePort: '2880', // '443' if a web server is configured to act as a reverse proxy to avoid exposing 2880 port
+				servicePath: '/', // 'wscservice/api' if a web server is configured to act as a reverse proxy
 				srcUrl: 'https://host_name/virtual_directory/wscbundle/wscbundle.js'
 			}
 		})
@@ -79,7 +79,7 @@ To find out more, refer the following documentation:
 
 ## Reporting issues
 
-We use GitHub Issues as the official public bug tracker for WProofreader. Here are some recommendations to take into account when reporting an issue:
+We use GitHub Issues as the official public bug tracker for WProofreader plugin for CKEditor 5. Here are some recommendations to take into account when reporting an issue:
 
 * Provide steps which help us to reproduce an issue. A sample page or JSFiddle is always welcomed.
 * Some issues may be browser and integration-specific. So, please specify what browser and integration you encountered the issue.
