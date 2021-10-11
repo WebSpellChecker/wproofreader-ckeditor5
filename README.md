@@ -61,8 +61,8 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 				lang: 'en_US', // sets the default language
 				serviceProtocol: 'https',
 				serviceHost: 'localhost',
-				servicePort: '2880', // '443' if a web server is configured to act as a reverse proxy to avoid exposing 2880 port
-				servicePath: '/', // 'wscservice/api' if a web server is configured to act as a reverse proxy
+				servicePort: '443',
+				servicePath: 'virtual_directory/api', // by default the virtual_directory is wscservice
 				srcUrl: 'https://host_name/virtual_directory/wscbundle/wscbundle.js'
 			}
 		})
