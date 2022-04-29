@@ -276,11 +276,13 @@ export default class WProofreader extends Plugin {
 	 * @public
 	 */
 	toggle() {
-		const options = { ignoreCallback: true };
+		if (this._instances.length === 0) {
+			return;
+		}
 
-		this._instances.forEach((instance) => {
-			instance.isDisabled() ? instance.enable(options) : instance.disable(options);
-		});
+		const enable = this.isInstancesEnabled();
+
+		this._syncToggle(!enable);
 	}
 
 	/**

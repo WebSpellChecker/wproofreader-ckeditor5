@@ -485,6 +485,16 @@ describe('WProofreader', () => {
 		});
 
 		describe('toggle method', () => {
+			it('should do nothing if WEBSPELLCHECKER instances are not ready', () => {
+				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
+
+				wproofreader._instances = [];
+
+				wproofreader.toggle();
+
+				sinon.assert.notCalled(syncToggleSpy);
+			});
+
 			it('should disable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'disable');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
@@ -492,7 +502,7 @@ describe('WProofreader', () => {
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
-				sinon.assert.notCalled(syncToggleSpy);
+				sinon.assert.calledOnce(syncToggleSpy);
 			});
 
 			it('should enable WEBSPELLCHECKER instances', () => {
@@ -504,7 +514,7 @@ describe('WProofreader', () => {
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
-				sinon.assert.notCalled(syncToggleSpy);
+				sinon.assert.calledOnce(syncToggleSpy);
 			});
 		});
 
