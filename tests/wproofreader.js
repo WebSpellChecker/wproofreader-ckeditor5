@@ -486,27 +486,32 @@ describe('WProofreader', () => {
 
 		describe('toggle method', () => {
 			it('should do nothing if WEBSPELLCHECKER instances are not ready', () => {
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader._instances = [];
 
 				wproofreader.toggle();
 
+				sinon.assert.notCalled(isInstancesEnabledSpy);
 				sinon.assert.notCalled(syncToggleSpy);
 			});
 
 			it('should disable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'disable');
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
+				sinon.assert.calledOnce(isInstancesEnabledSpy);
 				sinon.assert.calledOnce(syncToggleSpy);
 			});
 
 			it('should enable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'enable');
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader._instances[0].disabled = true;
@@ -514,6 +519,7 @@ describe('WProofreader', () => {
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
+				sinon.assert.calledOnce(isInstancesEnabledSpy);
 				sinon.assert.calledOnce(syncToggleSpy);
 			});
 		});
