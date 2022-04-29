@@ -14,7 +14,7 @@ describe('WProofreaderUI', () => {
 		srcUrl: 'http://localhost:3000/tests/mocks/mock-wscbundle.js'
 	};
 
-	let element, wproofreader, wproofreaderUI, testEditor;
+	let element, wproofreader, wproofreaderUI, testEditor, command;
 
 	beforeEach(() => {
 		element = document.createElement('div');
@@ -30,6 +30,7 @@ describe('WProofreaderUI', () => {
 				testEditor = editor;
 				wproofreader = testEditor.plugins.get('WProofreader');
 				wproofreaderUI = testEditor.plugins.get('WProofreaderUI');
+				command = testEditor.commands.get('WProofreaderToggle');
 			});
 	});
 
@@ -174,6 +175,16 @@ describe('WProofreaderUI', () => {
 
 				sinon.assert.calledOnce(spy);
 				sinon.assert.calledWithExactly(spy, 'WProofreaderDialog');
+			});
+		});
+
+		describe('isEnabled functionality', () => {
+			it('should have isEnabled bound to the WProofreaderToggle command\'s isEnabled', () => {
+				command.isEnabled = true;
+				expect(dropdown).to.have.property('isEnabled', true);
+
+				command.isEnabled = false;
+				expect(dropdown).to.have.property('isEnabled', false);
 			});
 		});
 	});
