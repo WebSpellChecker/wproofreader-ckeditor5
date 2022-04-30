@@ -44,6 +44,7 @@ export default class WProofreader extends Plugin {
 	init() {
 		this._userOptions = this._getUserOptions();
 		this._setTheme();
+		this._setAutoStartup();
 
 		this._loadWscbundle()
 			.then(() => {
@@ -87,6 +88,16 @@ export default class WProofreader extends Plugin {
 	_setTheme() {
 		if (!this._userOptions.theme) {
 			this._userOptions.theme = 'ckeditor5';
+		}
+	}
+
+	/**
+	 * Checks if the autoStartup option exists otherwise sets {@code true} value.
+	 * @private
+	 */
+	_setAutoStartup() {
+		if (!this._userOptions.hasOwnProperty('autoStartup')) {
+			this._userOptions.autoStartup = true;
 		}
 	}
 

@@ -112,6 +112,34 @@ describe('WProofreader', () => {
 		});
 	})
 
+	describe('with autoStartup option', () => {
+		it('should set `true` to the autoStartup option', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.autoStartup).to.be.equal(true);
+				})
+		});
+
+		it('should set user value to the autoStartup option', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign(WPROOFREADER_CONFIG, { autoStartup: false })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.autoStartup).to.be.equal(false);
+				})
+		});
+	})
+
 	describe('with invalid configuration', () => {
 		it('should not be load', () => {
 			return ClassicEditor
