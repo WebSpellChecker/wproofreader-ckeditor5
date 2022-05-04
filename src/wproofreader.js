@@ -119,7 +119,7 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
-	 * Configure the {@code isEnabled} state of the plugin.
+	 * Configures the {@code isEnabled} state of the plugin.
 	 * @private
 	 */
 	_setIsEnabled(enable, disableId) {
@@ -328,6 +328,7 @@ export default class WProofreader extends Plugin {
 		this._setIsEnabled(isEnabled, DISABLE_COMMAND_ID);
 		this._syncToggle(isEnabled);
 
+		// Method should return a boolean value to correct work of the bind functionality.
 		return isEnabled;
 	}
 

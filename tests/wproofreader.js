@@ -139,7 +139,7 @@ describe('WProofreader', () => {
 				})
 		});
 
-		it('should set user value to the autoStartup option', () => {
+		it('should set an user value to the autoStartup option', () => {
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
