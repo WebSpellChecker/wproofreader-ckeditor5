@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.1.0 – 2022-05-04
+
+* Added functionality that properly disables the plugin for certain editor's modes.
+
 ## 2.0.6 – 2021-06-15
 
 Internal changes only (updated dependencies, documentation, etc.).
