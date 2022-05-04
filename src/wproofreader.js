@@ -3,6 +3,9 @@ import WProofreaderEditing from './wproofreaderediting';
 import WProofreaderUI from './wproofreaderui';
 import { ScriptLoader } from './utils/script-loader';
 
+const DISABLE_COMMAND_ID = 'WProofreaderToggleCommandDisabling';
+const DISABLE_INSTANCES_ID = 'InstancesDisabling';
+
 /**
  * Initializes and creates instances of the {@code WEBSPELLCHECKER}.
  */
@@ -27,6 +30,14 @@ export default class WProofreader extends Plugin {
 	constructor(editor) {
 		super(editor);
 
+		/**
+		 * Flag indicating whether the {@code WProofreaderToggle} command is enabled.
+		 *
+		 * @observable
+		 * @member {Boolean}
+		 */
+		this.set('isToggleCommandEnabled', true);
+
 		this._instances = [];
 
 		this._collaborationPluginNames = [
@@ -45,6 +56,7 @@ export default class WProofreader extends Plugin {
 		this._userOptions = this._getUserOptions();
 		this._setTheme();
 		this._setAutoStartup();
+		this._setIsEnabled(this._userOptions.autoStartup, DISABLE_INSTANCES_ID);
 
 		this._loadWscbundle()
 			.then(() => {
@@ -53,6 +65,11 @@ export default class WProofreader extends Plugin {
 			.catch((error) => {
 				throw new Error(error);
 			});
+
+		this.bind('isToggleCommandEnabled').to(
+			this.editor.commands.get('WProofreaderToggle'), 'isEnabled',
+			(isEnabled) => this._handleToggleCommandEnabled(isEnabled)
+		);
 	}
 
 	/**
@@ -99,6 +116,14 @@ export default class WProofreader extends Plugin {
 		if (!this._userOptions.hasOwnProperty('autoStartup')) {
 			this._userOptions.autoStartup = true;
 		}
+	}
+
+	/**
+	 * Configure the {@code isEnabled} state of the plugin.
+	 * @private
+	 */
+	_setIsEnabled(enable, disableId) {
+		enable ? this.clearForceDisabled(disableId) : this.forceDisabled(disableId);
 	}
 
 	/**
@@ -209,6 +234,7 @@ export default class WProofreader extends Plugin {
 	_onToggle(instance) {
 		const enable = !instance.isDisabled();
 
+		this._setIsEnabled(enable, DISABLE_INSTANCES_ID);
 		this._syncToggle(enable);
 	}
 
@@ -217,11 +243,33 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_syncToggle(enable) {
+		this._instances.forEach((instance) => {
+			enable ? this._enableInstance(instance) : this._disableInstance(instance);
+		});
+	}
+
+	/**
+	 * Enables an instance of the {@code WEBSPELLCHECKER}.
+	 * @private
+	 */
+	_enableInstance(instance) {
 		const options = { ignoreCallback: true };
 
-		this._instances.forEach((instance) => {
-			enable ? instance.enable(options) : instance.disable(options);
-		});
+		if (!this.isEnabled) {
+			return;
+		}
+
+		instance.enable(options);
+	}
+
+	/**
+	 * Disables an instance of the {@code WEBSPELLCHECKER}.
+	 * @private
+	 */
+	_disableInstance(instance) {
+		const options = { ignoreCallback: true };
+
+		instance.disable(options);
 	}
 
 	/**
@@ -255,6 +303,10 @@ export default class WProofreader extends Plugin {
 			return;
 		}
 
+		if (!this.isEnabled) {
+			this._disableInstance(instance);
+		}
+
 		this._instances.push(instance);
 	}
 
@@ -266,6 +318,17 @@ export default class WProofreader extends Plugin {
 		this.editor.on('ready', () => {
 			this._createInstances();
 		});
+	}
+
+	/**
+	 * Handles an enabled state of the {@code WProofreaderToggle} command.
+	 * @private
+	 */
+	_handleToggleCommandEnabled(isEnabled) {
+		this._setIsEnabled(isEnabled, DISABLE_COMMAND_ID);
+		this._syncToggle(isEnabled);
+
+		return isEnabled;
 	}
 
 	/**
@@ -293,6 +356,7 @@ export default class WProofreader extends Plugin {
 
 		const enable = this.isInstancesEnabled();
 
+		this._setIsEnabled(!enable, DISABLE_INSTANCES_ID);
 		this._syncToggle(!enable);
 	}
 

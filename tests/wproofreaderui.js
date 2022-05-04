@@ -38,6 +38,7 @@ describe('WProofreaderUI', () => {
 		element.remove();
 		wproofreader = null;
 		wproofreaderUI = null;
+		command = null;
 
 		return testEditor.destroy();
 	});
