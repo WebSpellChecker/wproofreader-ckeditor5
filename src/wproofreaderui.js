@@ -90,6 +90,9 @@ export default class WProofreaderUI extends Plugin {
 				editor.execute(evt.source.commandParam);
 			});
 
+			// The dropdown view should be disabled if the WProofreaderToggle command is disabled.
+			dropdownView.bind('isEnabled').to(editor.commands.get('WProofreaderToggle'));
+
 			return dropdownView;
 		});
 	}

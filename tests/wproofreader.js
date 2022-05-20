@@ -28,7 +28,7 @@ describe('WProofreader', () => {
 	});
 
 	describe('with correct configuration', () => {
-		let testEditor, wproofreader;
+		let testEditor, wproofreader, command;
 
 		beforeEach(() => {
 			return ClassicEditor
@@ -40,6 +40,7 @@ describe('WProofreader', () => {
 				.then((editor) => {
 					testEditor = editor;
 					wproofreader = testEditor.plugins.get('WProofreader');
+					command = testEditor.commands.get('WProofreaderToggle');
 				});
 		});
 
@@ -62,6 +63,10 @@ describe('WProofreader', () => {
 			expect(wproofreader).to.have.property('_userOptions');
 		});
 
+		it('should contain isToggleCommandEnabled option', () => {
+			expect(wproofreader).to.have.property('isToggleCommandEnabled', true);
+		});
+
 		it('should save an instance of the WEBSPELLCHECKER', () => {
 			expect(wproofreader._instances.length).to.equal(1);
 		});
@@ -81,6 +86,14 @@ describe('WProofreader', () => {
 
 		it('should disable badge pulsing', () => {
 			expect(wproofreader._options.disableBadgePulsing).to.be.true;
+		});
+
+		it('should have isToggleCommandEnabled bound to the WProofreaderToggle command\'s isEnabled', () => {
+			command.isEnabled = true;
+			expect(wproofreader).to.have.property('isToggleCommandEnabled', true);
+
+			command.isEnabled = false;
+			expect(wproofreader).to.have.property('isToggleCommandEnabled', false);
 		});
 	});
 
@@ -102,12 +115,273 @@ describe('WProofreader', () => {
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
-					wproofreader: Object.assign(WPROOFREADER_CONFIG, { theme: 'default' })
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { theme: 'default' })
 				})
 				.then((editor) => {
 					const wproofreader = editor.plugins.get('WProofreader');
 
 					expect(wproofreader._userOptions.theme).to.be.equal('default');
+				})
+		});
+	})
+
+	describe('with autoStartup option', () => {
+		it('should set `true` to the autoStartup option', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.autoStartup).to.be.true;
+				})
+		});
+
+		it('should set an user value to the autoStartup option', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { autoStartup: false })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.autoStartup).to.be.false;
+				})
+		});
+	})
+
+	describe('disable functionality', () => {
+		it('should enable the plugin and instances because autoStartup option is enabled', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+				})
+		});
+
+		it('should disable the plugin and instances because autoStartup option is disabled', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { autoStartup: false })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+				})
+		});
+
+		it('should disable the plugin and instances after the WProofreaderToggle command is disabled', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					expect(command.isEnabled).to.be.true;
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+
+					command.isEnabled = false;
+
+					expect(command.isEnabled).to.be.false;
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.true;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+				})
+		});
+
+		it('should enable the plugin and instances after the WProofreaderToggle command is enabled', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					command.isEnabled = false;
+
+					expect(command.isEnabled).to.be.false;
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.true;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.isEnabled = true;
+
+					expect(command.isEnabled).to.be.true;
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+				})
+		});
+
+		it('should disable the plugin and instances after the toggle command execution', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+				})
+		});
+
+		it('should enable the plugin and instances after the toggle command execution', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+				})
+		});
+
+		it('should enable the plugin and instances after the toggle command execution when autoStartup option is disabled', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { autoStartup: false })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+				})
+		});
+
+		it('should disable the plugin and instances after the toggle command execution and the WProofreaderToggle command disabling', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.isEnabled = false;
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.true;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+				})
+		});
+
+		it('should enable the plugin and instances after the toggle command execution and the WProofreaderToggle command enabling', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+					const command = editor.commands.get('WProofreaderToggle');
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.isEnabled = false;
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.true;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.isEnabled = true;
+
+					expect(wproofreader.isEnabled).to.be.false;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.true;
+
+					command.execute();
+
+					expect(wproofreader.isEnabled).to.be.true;
+					expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
+					expect(wproofreader._disableStack.has('WProofreaderToggleCommandDisabling')).to.be.false;
+					expect(wproofreader._instances[0].isDisabled()).to.be.false;
 				})
 		});
 	})
@@ -375,6 +649,7 @@ describe('WProofreader', () => {
 					})
 					.then(() => {
 						const wproofreader = editor.plugins.get('WProofreader');
+						const setIsEnabledSpy = sinon.spy(wproofreader, '_setIsEnabled');
 						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 						const spy = sinon.spy(wproofreader._instances[0], 'disable');
 
@@ -384,6 +659,7 @@ describe('WProofreader', () => {
 
 						// Checks that the spy was called twice because it was called manually once.
 						sinon.assert.calledTwice(spy);
+						sinon.assert.calledOnce(setIsEnabledSpy);
 						sinon.assert.calledOnce(syncToggleSpy);
 					});
 			});
@@ -404,6 +680,7 @@ describe('WProofreader', () => {
 					})
 					.then(() => {
 						const wproofreader = editor.plugins.get('WProofreader');
+						const setIsEnabledSpy = sinon.spy(wproofreader, '_setIsEnabled');
 						const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 						const spies = [];
 
@@ -424,6 +701,7 @@ describe('WProofreader', () => {
 							sinon.assert.calledOnce(spies[i]);
 						}
 
+						sinon.assert.calledOnce(setIsEnabledSpy);
 						sinon.assert.calledOnce(syncToggleSpy);
 					});
 			});
@@ -485,18 +763,40 @@ describe('WProofreader', () => {
 		});
 
 		describe('toggle method', () => {
+			it('should do nothing if WEBSPELLCHECKER instances are not ready', () => {
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
+				const setIsEnabledSpy = sinon.spy(wproofreader, '_setIsEnabled');
+				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
+
+				wproofreader._instances = [];
+
+				wproofreader.toggle();
+
+				sinon.assert.notCalled(isInstancesEnabledSpy);
+				sinon.assert.notCalled(setIsEnabledSpy);
+				sinon.assert.notCalled(syncToggleSpy);
+			});
+
 			it('should disable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'disable');
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
+				const setIsEnabledSpy = sinon.spy(wproofreader, '_setIsEnabled');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
-				sinon.assert.notCalled(syncToggleSpy);
+				sinon.assert.calledOnce(isInstancesEnabledSpy);
+				sinon.assert.calledOnce(setIsEnabledSpy);
+				sinon.assert.calledOnce(syncToggleSpy);
+				expect(wproofreader.isEnabled).to.be.false;
+				expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.true;
 			});
 
 			it('should enable WEBSPELLCHECKER instances', () => {
 				const spy = sinon.spy(wproofreader._instances[0], 'enable');
+				const isInstancesEnabledSpy = sinon.spy(wproofreader, 'isInstancesEnabled');
+				const setIsEnabledSpy = sinon.spy(wproofreader, '_setIsEnabled');
 				const syncToggleSpy = sinon.spy(wproofreader, '_syncToggle');
 
 				wproofreader._instances[0].disabled = true;
@@ -504,7 +804,11 @@ describe('WProofreader', () => {
 				wproofreader.toggle();
 
 				sinon.assert.calledOnce(spy);
-				sinon.assert.notCalled(syncToggleSpy);
+				sinon.assert.calledOnce(isInstancesEnabledSpy);
+				sinon.assert.calledOnce(setIsEnabledSpy);
+				sinon.assert.calledOnce(syncToggleSpy);
+				expect(wproofreader.isEnabled).to.be.true;
+				expect(wproofreader._disableStack.has('InstancesDisabling')).to.be.false;
 			});
 		});
 
