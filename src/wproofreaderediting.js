@@ -27,8 +27,10 @@ export default class WProofreaderEditing extends Plugin {
 	 * @public
 	 */
 	afterInit() {
-		this._enableInMode('TrackChanges', 'TrackChangesEditing');
-		this._enableInMode('RestrictedEditingMode', 'RestrictedEditingModeEditing');
+		this._enableInModes([
+			{ modeName: 'TrackChanges', editingName: 'TrackChangesEditing' },
+			{ modeName: 'RestrictedEditingMode', editingName: 'RestrictedEditingModeEditing' }
+		]);
 	}
 
 	/**
@@ -39,6 +41,16 @@ export default class WProofreaderEditing extends Plugin {
 		this.editor.commands.add('WProofreaderToggle', new WProofreaderToggleCommand(this.editor));
 		this.editor.commands.add('WProofreaderSettings', new WProofreaderSettingsCommand(this.editor));
 		this.editor.commands.add('WProofreaderDialog', new WProofreaderDialogCommand(this.editor));
+	}
+
+	/**
+	 * Enables the {@code WProofreader} commands in a certain CKEditor 5 modes.
+	 * @private
+	 */
+	_enableInModes(modes) {
+		modes.forEach((mode) => {
+			this._enableInMode(mode.modeName, mode.editingName);
+		});
 	}
 
 	/**
