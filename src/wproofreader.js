@@ -47,7 +47,7 @@ export default class WProofreader extends Plugin {
 			'RealTimeCollaborationClient'
 		];
 
-		this._restrictedEditingMode = 'RestrictedEditingMode';
+		this._restrictedEditingName = 'RestrictedEditingMode';
 	}
 
 	/**
@@ -202,7 +202,7 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_checkRestrictedEditingMode() {
-		return this.editor.plugins.has(this._restrictedEditingMode);
+		return this.editor.plugins.has(this._restrictedEditingName);
 	}
 
 	/**
