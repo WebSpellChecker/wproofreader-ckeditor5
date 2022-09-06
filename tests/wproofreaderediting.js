@@ -4,9 +4,10 @@ import WProofreaderToggleCommand from '../src/wproofreadertogglecommand';
 import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand';
 import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand';
 import { TrackChanges } from './mocks/mock-track-changes-editing';
+import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode';
 
 describe('WProofreaderEditing', () => {
-	let element, wproofreaderEditing, trackChangesEditing, testEditor;
+	let element, wproofreaderEditing, trackChangesEditing, restrictedEditingModeEditing, testEditor;
 
 	beforeEach(() => {
 		element = document.createElement('div');
@@ -14,12 +15,13 @@ describe('WProofreaderEditing', () => {
 
 		return ClassicEditor
 			.create(element, {
-				plugins: [WProofreaderEditing, TrackChanges]
+				plugins: [WProofreaderEditing, TrackChanges, RestrictedEditingMode]
 			})
 			.then((editor) => {
 				testEditor = editor;
 				wproofreaderEditing = testEditor.plugins.get('WProofreaderEditing');
 				trackChangesEditing = testEditor.plugins.get('TrackChangesEditing');
+				restrictedEditingModeEditing = testEditor.plugins.get('RestrictedEditingModeEditing');
 			});
 	});
 
@@ -27,6 +29,7 @@ describe('WProofreaderEditing', () => {
 		element.remove();
 		wproofreaderEditing = null;
 		trackChangesEditing = null;
+		restrictedEditingModeEditing = null;
 
 		return testEditor.destroy();
 	});
@@ -50,5 +53,9 @@ describe('WProofreaderEditing', () => {
 
 	it('should enable WProofreader commands in the Track Changes mode', () => {
 		expect(trackChangesEditing.counter).to.be.equal(3);
+	});
+
+	it('should enable WProofreader commands in the Restricted Editing mode', () => {
+		expect(restrictedEditingModeEditing.counter).to.be.equal(3);
 	});
 });
