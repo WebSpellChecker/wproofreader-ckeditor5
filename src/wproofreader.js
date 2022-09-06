@@ -170,7 +170,7 @@ export default class WProofreader extends Plugin {
 	 */
 	_setFields() {
 		this._isMultiRoot = this._checkMultiRoot();
-		this._isCollaboration = this._checkCollaborationMode();
+		this._isCollaborationMode = this._checkCollaborationMode();
 		this._isRestrictedEditingMode = this._checkRestrictedEditingMode();
 		this._options = this._createOptions();
 	}
@@ -212,7 +212,7 @@ export default class WProofreader extends Plugin {
 	_createOptions() {
 		return {
 			appType: 'proofreader_ck5',
-			disableDialog: this._isMultiRoot || this._isCollaboration,
+			disableDialog: this._isMultiRoot || this._isCollaborationMode,
 			restrictedEditingMode: this._isRestrictedEditingMode,
 			hideStaticActions: true,
 			disableBadgePulsing: true,
