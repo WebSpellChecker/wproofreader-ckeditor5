@@ -46,6 +46,8 @@ export default class WProofreader extends Plugin {
 			'RealTimeCollaborativeComments',
 			'RealTimeCollaborationClient'
 		];
+
+		this._restrictedEditingName = 'RestrictedEditingMode';
 	}
 
 	/**
@@ -168,7 +170,8 @@ export default class WProofreader extends Plugin {
 	 */
 	_setFields() {
 		this._isMultiRoot = this._checkMultiRoot();
-		this._isCollaboration = this._checkCollaborationMode();
+		this._isCollaborationMode = this._checkCollaborationMode();
+		this._isRestrictedEditingMode = this._checkRestrictedEditingMode();
 		this._options = this._createOptions();
 	}
 
@@ -195,13 +198,22 @@ export default class WProofreader extends Plugin {
 	}
 
 	/**
+	 * Checks if the current editor in the restricted editing mode.
+	 * @private
+	 */
+	_checkRestrictedEditingMode() {
+		return this.editor.plugins.has(this._restrictedEditingName);
+	}
+
+	/**
 	 * Creates options for the {@code WEBSPELLCHECKER} initialization.
 	 * @private
 	 */
 	_createOptions() {
 		return {
 			appType: 'proofreader_ck5',
-			disableDialog: this._isMultiRoot || this._isCollaboration,
+			disableDialog: this._isMultiRoot || this._isCollaborationMode,
+			restrictedEditingMode: this._isRestrictedEditingMode,
 			hideStaticActions: true,
 			disableBadgePulsing: true,
 			onCommitOptions: this._onCommitOptions.bind(this),

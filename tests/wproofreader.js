@@ -6,6 +6,7 @@ import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing
 import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing';
 import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing';
+import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode';
 
 describe('WProofreader', () => {
 	const WPROOFREADER_CONFIG = {
@@ -78,6 +79,10 @@ describe('WProofreader', () => {
 
 		it('should not disable dialog option', () => {
 			expect(wproofreader._options.disableDialog).to.be.false;
+		});
+
+		it('should contain restrictedEditingMode option', () => {
+			expect(wproofreader._options.restrictedEditingMode).to.be.false;
 		});
 
 		it('should hide static actions', () => {
@@ -489,6 +494,22 @@ describe('WProofreader', () => {
 					expect(editor.plugins.has('RealTimeCollaborativeComments')).to.be.true;
 					expect(editor.plugins.has('RealTimeCollaborationClient')).to.be.true;
 					expect(wproofreader._options.disableDialog).to.be.true;
+				});
+		});
+	});
+
+	describe('in CKEditor 5 restricted editing mode', () => {
+		it('should enable the restrictedEditingMode option of the WEBSPELLCHECKER because of RestrictedEditingMode plugin', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader, RestrictedEditingMode],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(editor.plugins.has('RestrictedEditingMode')).to.be.true;
+					expect(wproofreader._options.restrictedEditingMode).to.be.true;
 				});
 		});
 	});
