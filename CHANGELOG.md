@@ -1,5 +1,11 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.2.0 – 2022-10-11
+
+* Make WProofreader work with Restricted Editing mode. [#31](https://github.com/WebSpellChecker/wproofreader/issues/31).
+
+The new version of the plugin is compatible with WebSpellChecker v5.25.0 and higher.
+
 ## 2.1.0 – 2022-05-04
 
 * Added functionality that properly disables the plugin for certain editor's modes.
