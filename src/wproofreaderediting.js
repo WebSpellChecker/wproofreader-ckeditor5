@@ -20,7 +20,17 @@ export default class WProofreaderEditing extends Plugin {
 	 */
 	init() {
 		this._addCommands();
-		this._enableInTrackChanges();
+	}
+
+	/**
+	 * Initializes the {@code WProofreaderEditing} plugin in the third initialization stage.
+	 * @public
+	 */
+	afterInit() {
+		this._enableInModes([
+			{ modeName: 'TrackChanges', editingName: 'TrackChangesEditing' },
+			{ modeName: 'RestrictedEditingMode', editingName: 'RestrictedEditingModeEditing' }
+		]);
 	}
 
 	/**
@@ -34,17 +44,27 @@ export default class WProofreaderEditing extends Plugin {
 	}
 
 	/**
-	 * Enables the {@code WProofreader} commands in the Track Changes mode.
+	 * Enables the {@code WProofreader} commands in a certain CKEditor 5 modes.
 	 * @private
 	 */
-	_enableInTrackChanges() {
-		const isTrackChangesLoaded = this.editor.plugins.has('TrackChanges');
+	_enableInModes(modes) {
+		modes.forEach((mode) => {
+			this._enableInMode(mode.modeName, mode.editingName);
+		});
+	}
 
-		if (isTrackChangesLoaded) {
-			const trackChangesEditing = this.editor.plugins.get('TrackChangesEditing');
+	/**
+	 * Enables the {@code WProofreader} commands in a certain CKEditor 5 mode.
+	 * @private
+	 */
+	_enableInMode(modeName, editingName) {
+		const isModeLoaded = this.editor.plugins.has(modeName);
+
+		if (isModeLoaded) {
+			const editing = this.editor.plugins.get(editingName);
 			const commands = ['WProofreaderToggle', 'WProofreaderSettings', 'WProofreaderDialog'];
 
-			commands.forEach((command) => trackChangesEditing.enableCommand(command));
+			commands.forEach((command) => editing.enableCommand(command));
 		}
 	}
 }
