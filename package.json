@@ -32,7 +32,15 @@
     "wproofreader"
   ],
   "devDependencies": {
+    "@ckeditor/ckeditor5-basic-styles": ">=16.0.0",
     "@ckeditor/ckeditor5-dev-tests": ">=16.0.0",
+    "@ckeditor/ckeditor5-dev-utils": ">=13.0.0",
+    "@ckeditor/ckeditor5-editor-classic": ">=16.0.0",
+    "@ckeditor/ckeditor5-essentials": ">=16.0.0",
+    "@ckeditor/ckeditor5-heading": ">=16.0.0",
+    "@ckeditor/ckeditor5-list": ">=16.0.0",
+    "@ckeditor/ckeditor5-paragraph": ">=16.0.0",
+    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0",
     "concurrently": "^5.0.2",
     "eslint": "^6.8.0",
     "http-server": "^0.12.1",
@@ -43,13 +51,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-basic-styles": ">=16.0.0",
-    "@ckeditor/ckeditor5-dev-utils": ">=13.0.0",
-    "@ckeditor/ckeditor5-editor-classic": ">=16.0.0",
-    "@ckeditor/ckeditor5-essentials": ">=16.0.0",
-    "@ckeditor/ckeditor5-heading": ">=16.0.0",
-    "@ckeditor/ckeditor5-list": ">=16.0.0",
-    "@ckeditor/ckeditor5-paragraph": ">=16.0.0",
-    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0"
+    "ckeditor5": ">=16.0.0"
   }
 }
