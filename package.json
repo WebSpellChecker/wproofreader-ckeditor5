@@ -1,6 +1,6 @@
 {
   "name": "@webspellchecker/wproofreader-ckeditor5",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Multilingual spelling and grammar checking plugin for CKEditor 5",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack --mode development -w",
     "build": "./node_modules/.bin/webpack --mode production",
-    "test": "concurrently --kill-others --success \"first\" \"node --max_old_space_size=4096 node_modules/@ckeditor/ckeditor5-dev-tests/bin/test.js -c --files=ckeditor5\" \"http-server -c-0 --cors -p 3000 -s\""
+    "test": "concurrently --kill-others --success \"first\" \"node --max_old_space_size=4096 node_modules/@ckeditor/ckeditor5-dev-tests/bin/testautomated.js -c --files=ckeditor5\" \"http-server -c-0 --cors -p 3000 -s\""
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
   "bugs": {
@@ -32,24 +32,26 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-tests": ">=16.0.0",
-    "concurrently": "^5.0.2",
-    "eslint": "^6.8.0",
-    "http-server": "^0.12.1",
-    "postcss-loader": "^3.0.0",
-    "raw-loader": "^3.1.0",
-    "style-loader": "^1.1.1",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {
     "@ckeditor/ckeditor5-basic-styles": ">=16.0.0",
+    "@ckeditor/ckeditor5-dev-tests": ">=16.0.0",
     "@ckeditor/ckeditor5-dev-utils": ">=13.0.0",
     "@ckeditor/ckeditor5-editor-classic": ">=16.0.0",
     "@ckeditor/ckeditor5-essentials": ">=16.0.0",
     "@ckeditor/ckeditor5-heading": ">=16.0.0",
     "@ckeditor/ckeditor5-list": ">=16.0.0",
     "@ckeditor/ckeditor5-paragraph": ">=16.0.0",
-    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0"
+    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0",
+    "concurrently": "^8.0.1",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.40.0",
+    "http-server": "^14.1.1",
+    "postcss-loader": "^7.3.0",
+    "raw-loader": "^4.0.2",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1"
+  },
+  "dependencies": {
+    "ckeditor5": ">=16.0.0"
   }
 }
