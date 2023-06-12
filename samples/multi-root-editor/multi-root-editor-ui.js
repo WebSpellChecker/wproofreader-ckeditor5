@@ -1,5 +1,4 @@
-import EditorUI from '@ckeditor/ckeditor5-core/src/editor/editorui';
-import enableToolbarKeyboardFocus from '@ckeditor/ckeditor5-ui/src/toolbar/enabletoolbarkeyboardfocus';
+import EditorUI from '@ckeditor/ckeditor5-ui/src/editorui/editorui';
 import { enablePlaceholder } from '@ckeditor/ckeditor5-engine/src/view/placeholder';
 
 /**
@@ -69,11 +68,6 @@ export default class MultirootEditorUI extends EditorUI {
 			// Register each editable UI view in the editor.
 			this.setEditableElement(editable.name, editableElement);
 
-			// Let the global focus tracker know that the editable UI element is focusable and
-			// belongs to the editor. From now on, the focus tracker will sustain the editor focus
-			// as long as the editable is focused (e.g. the user is typing).
-			this.focusTracker.add(editableElement);
-
 			// Let the editable UI element respond to the changes in the global editor focus
 			// tracker. It has been added to the same tracker a few lines above but, in reality, there are
 			// many focusable areas in the editor, like balloons, toolbars or dropdowns and as long
@@ -137,18 +131,10 @@ export default class MultirootEditorUI extends EditorUI {
 	 * @private
 	 */
 	_initToolbar() {
-		const editor = this.editor;
-		const view = this.view;
-		const toolbar = view.toolbar;
+		const toolbar = this.view.toolbar;
 
-		toolbar.fillFromConfig(editor.config.get('toolbar'), this.componentFactory);
-
-		enableToolbarKeyboardFocus({
-			origin: editor.editing.view,
-			originFocusTracker: this.focusTracker,
-			originKeystrokeHandler: editor.keystrokes,
-			toolbar
-		});
+		toolbar.fillFromConfig(this.editor.config.get('toolbar'), this.componentFactory);
+		this.editor.ui.addToolbar(toolbar)
 	}
 
 	/**
