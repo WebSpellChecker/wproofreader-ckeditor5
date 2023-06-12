@@ -214,7 +214,6 @@ export default class WProofreader extends Plugin {
 			appType: 'proofreader_ck5',
 			disableDialog: this._isMultiRoot || this._isCollaborationMode,
 			restrictedEditingMode: this._isRestrictedEditingMode,
-			hideStaticActions: true,
 			disableBadgePulsing: true,
 			onCommitOptions: this._onCommitOptions.bind(this),
 			onToggle: this._onToggle.bind(this)
