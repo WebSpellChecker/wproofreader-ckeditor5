@@ -1,5 +1,10 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.3.0 – 2023-06-13
+
+* Enabled all the actions such in the badge similarly to ones in the toolbar icon. [#67](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/67).
+* Improved text hint for the WProofreader toolbar icon.  [#68](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/68).
+
 ## 2.2.1 – 2023-05-10
 
 Internal changes only (updated dependencies, documentation, etc.).
