@@ -51,7 +51,7 @@ export default class WProofreaderUI extends Plugin {
 			let dropdownItemsDefinitions, actions;
 
 			dropdownView.buttonView.set({
-				label: 'WProofreader',
+				label: 'WProofreader text checker',
 				icon: wproofreaderIcon,
 				tooltip: true
 			});
