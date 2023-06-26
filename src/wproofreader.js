@@ -216,7 +216,9 @@ export default class WProofreader extends Plugin {
 			restrictedEditingMode: this._isRestrictedEditingMode,
 			disableBadgePulsing: true,
 			onCommitOptions: this._onCommitOptions.bind(this),
-			onToggle: this._onToggle.bind(this)
+			onToggle: this._onToggle.bind(this),
+			badgeOffsetX: 11,
+			badgeOffsetY: 11
 		};
 	}
 
