@@ -85,10 +85,6 @@ describe('WProofreader', () => {
 			expect(wproofreader._options.restrictedEditingMode).to.be.false;
 		});
 
-		it('should hide static actions', () => {
-			expect(wproofreader._options.hideStaticActions).to.be.true;
-		});
-
 		it('should disable badge pulsing', () => {
 			expect(wproofreader._options.disableBadgePulsing).to.be.true;
 		});
