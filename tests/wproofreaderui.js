@@ -65,7 +65,7 @@ describe('WProofreaderUI', () => {
 
 		describe('buttonView', () => {
 			it('should have basic properties', () => {
-				expect(dropdown.buttonView.label).to.equal('WProofreader');
+				expect(dropdown.buttonView.label).to.equal('WProofreader text checker');
 				expect(dropdown.buttonView.icon).to.equal(wproofreaderIcon);
 				expect(dropdown.buttonView.tooltip).to.be.true;
 			});
