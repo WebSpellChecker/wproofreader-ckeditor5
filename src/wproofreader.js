@@ -58,6 +58,7 @@ export default class WProofreader extends Plugin {
 		this._userOptions = this._getUserOptions();
 		this._setTheme();
 		this._setAutoStartup();
+		this._setBadgeOffset();
 		this._setIsEnabled(this._userOptions.autoStartup, DISABLE_INSTANCES_ID);
 
 		this._loadWscbundle()
@@ -117,6 +118,26 @@ export default class WProofreader extends Plugin {
 	_setAutoStartup() {
 		if (!this._userOptions.hasOwnProperty('autoStartup')) {
 			this._userOptions.autoStartup = true;
+		}
+	}
+
+	/**
+	 * Checks if the badgeOffsetX/badgeOffsetY and fullSizeBadge options exist otherwise sets values by default.
+	 * @private
+	 */
+	_setBadgeOffset() {
+		const badgeOffset = 11;
+
+		if (this._userOptions.fullSizeBadge) {
+			return;
+		}
+
+		if (!this._userOptions.hasOwnProperty('badgeOffsetX')) {
+			this._userOptions.badgeOffsetX = badgeOffset;
+		}
+
+		if (!this._userOptions.hasOwnProperty('badgeOffsetY')) {
+			this._userOptions.badgeOffsetY = badgeOffset;
 		}
 	}
 
