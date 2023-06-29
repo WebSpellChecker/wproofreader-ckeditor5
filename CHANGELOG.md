@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 2.3.1 – 2023-06-29
+
+* Increase the distance from the badge to the edges of the editor. [#71](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/71).
+
 ## 2.3.0 – 2023-06-13
 
 * Enabled all the actions such in the badge similarly to ones in the toolbar icon. [#67](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/67).
