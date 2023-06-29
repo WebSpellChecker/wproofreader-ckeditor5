@@ -85,10 +85,6 @@ describe('WProofreader', () => {
 			expect(wproofreader._options.restrictedEditingMode).to.be.false;
 		});
 
-		it('should hide static actions', () => {
-			expect(wproofreader._options.hideStaticActions).to.be.true;
-		});
-
 		it('should disable badge pulsing', () => {
 			expect(wproofreader._options.disableBadgePulsing).to.be.true;
 		});
@@ -154,6 +150,55 @@ describe('WProofreader', () => {
 					const wproofreader = editor.plugins.get('WProofreader');
 
 					expect(wproofreader._userOptions.autoStartup).to.be.false;
+				})
+		});
+	})
+
+	describe('with badgeOffset options', () => {
+		it('should set `11` pixels to the badgeOffset options', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: WPROOFREADER_CONFIG
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.badgeOffsetX).to.be.equal(11);
+					expect(wproofreader._userOptions.badgeOffsetY).to.be.equal(11);
+				})
+		});
+
+		it('should set user values to the badgeOffset options', () => {
+			const badgeOffsetX = 12;
+			const badgeOffsetY = 13;
+			
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { badgeOffsetX, badgeOffsetY })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.badgeOffsetX).to.be.equal(badgeOffsetX);
+					expect(wproofreader._userOptions.badgeOffsetY).to.be.equal(badgeOffsetY);
+				})
+		});
+	})
+
+	describe('with fullSizeBadge option', () => {
+		it('should avoid setting default badgeOffset options', () => {
+			return ClassicEditor
+				.create(element, {
+					plugins: [WProofreader],
+					wproofreader: Object.assign({}, WPROOFREADER_CONFIG, { fullSizeBadge: true })
+				})
+				.then((editor) => {
+					const wproofreader = editor.plugins.get('WProofreader');
+
+					expect(wproofreader._userOptions.badgeOffsetX).to.be.undefined;
+					expect(wproofreader._userOptions.badgeOffsetY).to.be.undefined;
 				})
 		});
 	})
