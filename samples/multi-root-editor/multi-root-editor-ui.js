@@ -1,5 +1,5 @@
-import EditorUI from '@ckeditor/ckeditor5-ui/src/editorui/editorui';
-import { enablePlaceholder } from '@ckeditor/ckeditor5-engine/src/view/placeholder';
+import { EditorUI } from 'ckeditor5/src/ui.js';
+import { enablePlaceholder } from 'ckeditor5/src/engine.js';
 
 /**
  * The multi-root editor UI class.

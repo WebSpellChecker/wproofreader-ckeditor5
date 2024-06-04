@@ -1,12 +1,13 @@
-import MultirootEditorBase from './multi-root-editor';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import WProofreader from '../../src/wproofreader';
+import MultirootEditorBase from './multi-root-editor.js';
+import { Essentials } from '@ckeditor/ckeditor5-essentials';
+import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
+import { Heading } from '@ckeditor/ckeditor5-heading';
+import { List } from '@ckeditor/ckeditor5-list';
+import { Bold } from '@ckeditor/ckeditor5-basic-styles';
+import { Italic } from '@ckeditor/ckeditor5-basic-styles';
 
-export default class MultirootEditor extends MultirootEditorBase {};
+import WProofreader from '../../src/wproofreader.js';
+
+export default class MultirootEditor extends MultirootEditorBase {}
 
 MultirootEditor.builtinPlugins = [Essentials, Paragraph, Heading, List, Bold, Italic, WProofreader];

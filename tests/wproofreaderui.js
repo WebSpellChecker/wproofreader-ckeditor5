@@ -1,8 +1,8 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import DropdownView from '@ckeditor/ckeditor5-ui/src/dropdown/dropdownview';
-import ListView from '@ckeditor/ckeditor5-ui/src/list/listview';
-import WProofreader from '../src/wproofreader';
-import WProofreaderUI from '../src/wproofreaderui';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import DropdownView from '@ckeditor/ckeditor5-ui/src/dropdown/dropdownview.js';
+import ListView from '@ckeditor/ckeditor5-ui/src/list/listview.js';
+import WProofreader from '../src/wproofreader.js';
+import WProofreaderUI from '../src/wproofreaderui.js';
 import wproofreaderIcon from '../theme/icons/wproofreader.svg';
 
 describe('WProofreaderUI', () => {

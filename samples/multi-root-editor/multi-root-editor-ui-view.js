@@ -1,7 +1,4 @@
-import EditorUIView from '@ckeditor/ckeditor5-ui/src/editorui/editoruiview';
-import InlineEditableUIView from '@ckeditor/ckeditor5-ui/src/editableui/inline/inlineeditableuiview';
-import ToolbarView from '@ckeditor/ckeditor5-ui/src/toolbar/toolbarview';
-import Template from '@ckeditor/ckeditor5-ui/src/template';
+import { EditorUIView, ToolbarView, Template, InlineEditableUIView } from 'ckeditor5/src/ui.js';
 
 /**
  * The multi-root editor UI view. It is a virtual view providing an inline editable, but without

@@ -1,7 +1,8 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import WProofreaderToggleCommand from './wproofreadertogglecommand';
-import WProofreaderSettingsCommand from './wproofreadersettingscommand';
-import WProofreaderDialogCommand from './wproofreaderdialogcommand';
+import { Plugin } from 'ckeditor5/src/core.js';
+
+import WProofreaderToggleCommand from './wproofreadertogglecommand.js';
+import WProofreaderSettingsCommand from './wproofreadersettingscommand.js';
+import WProofreaderDialogCommand from './wproofreaderdialogcommand.js';
 
 /**
  * The {@code WProofreaderEditing} plugin. It introduces all {@code WProofreader} commands.

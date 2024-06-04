@@ -1,10 +1,7 @@
-import Editor from '@ckeditor/ckeditor5-core/src/editor/editor';
-import DataApiMixin from '@ckeditor/ckeditor5-core/src/editor/utils/dataapimixin';
-import getDataFromElement from '@ckeditor/ckeditor5-utils/src/dom/getdatafromelement';
-import setDataInElement from '@ckeditor/ckeditor5-utils/src/dom/setdatainelement';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
-import MultirootEditorUI from './multi-root-editor-ui';
-import MultirootEditorUIView from './multi-root-editor-ui-view';
+import { Editor, DataApiMixin } from 'ckeditor5/src/core.js';
+import { getDataFromElement, setDataInElement, mix } from 'ckeditor5/src/utils.js';
+import MultirootEditorUI from './multi-root-editor-ui.js';
+import MultirootEditorUIView from './multi-root-editor-ui-view.js';
 
 /**
  * The multi-root editor implementation. It provides inline editables and a single toolbar.

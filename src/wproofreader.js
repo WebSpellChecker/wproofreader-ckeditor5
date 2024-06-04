@@ -1,7 +1,8 @@
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import WProofreaderEditing from './wproofreaderediting';
-import WProofreaderUI from './wproofreaderui';
-import { ScriptLoader } from './utils/script-loader';
+import { Plugin } from 'ckeditor5/src/core.js';
+
+import WProofreaderEditing from './wproofreaderediting.js';
+import WProofreaderUI from './wproofreaderui.js';
+import { ScriptLoader } from './utils/script-loader.js';
 
 const DISABLE_COMMAND_ID = 'WProofreaderToggleCommandDisabling';
 const DISABLE_INSTANCES_ID = 'InstancesDisabling';
@@ -116,7 +117,7 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_setAutoStartup() {
-		if (!this._userOptions.hasOwnProperty('autoStartup')) {
+		if (!Object.prototype.hasOwnProperty.call(this._userOptions, 'autoStartup')) {
 			this._userOptions.autoStartup = true;
 		}
 	}
@@ -132,11 +133,11 @@ export default class WProofreader extends Plugin {
 			return;
 		}
 
-		if (!this._userOptions.hasOwnProperty('badgeOffsetX')) {
+		if (!Object.prototype.hasOwnProperty.call(this._userOptions, 'badgeOffsetX')) {
 			this._userOptions.badgeOffsetX = badgeOffset;
 		}
 
-		if (!this._userOptions.hasOwnProperty('badgeOffsetY')) {
+		if (!Object.prototype.hasOwnProperty.call(this._userOptions, 'badgeOffsetY')) {
 			this._userOptions.badgeOffsetY = badgeOffset;
 		}
 	}

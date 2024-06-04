@@ -1,4 +1,4 @@
-import Command from '@ckeditor/ckeditor5-core/src/command';
+import { Command } from 'ckeditor5/src/core.js';
 
 /**
  * The {@code WProofreaderToggleCommand} to toggle the {@code WProofreader}.
@@ -9,7 +9,7 @@ export default class WProofreaderToggleCommand extends Command {
 	 * @public
 	 * @inheritDoc
 	 */
-	execute(options = {}) {
+	execute() {
 		const wproofreader = this.editor.plugins.get('WProofreader');
 
 		wproofreader.toggle();

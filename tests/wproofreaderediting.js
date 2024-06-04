@@ -1,10 +1,10 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import WProofreaderEditing from '../src/wproofreaderediting';
-import WProofreaderToggleCommand from '../src/wproofreadertogglecommand';
-import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand';
-import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand';
-import { TrackChanges } from './mocks/mock-track-changes-editing';
-import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import WProofreaderEditing from '../src/wproofreaderediting.js';
+import WProofreaderToggleCommand from '../src/wproofreadertogglecommand.js';
+import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand.js';
+import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand.js';
+import { TrackChanges } from './mocks/mock-track-changes-editing.js';
+import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode.js';
 
 describe('WProofreaderEditing', () => {
 	let element, wproofreaderEditing, trackChangesEditing, restrictedEditingModeEditing, testEditor;

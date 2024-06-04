@@ -1,4 +1,4 @@
-import SrcStorage from "../src/utils/src-storage";
+import SrcStorage from "../src/utils/src-storage.js";
 
 describe('SrcStorage', () => {
 	let srcStorage;

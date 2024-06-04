@@ -1,4 +1,4 @@
-import { ScriptLoader } from "../src/utils/script-loader";
+import { ScriptLoader } from "../src/utils/script-loader.js";
 
 describe('ScriptLoader', () => {
 	const src = 'http://localhost:3000/tests/mocks/mock-wscbundle.js';

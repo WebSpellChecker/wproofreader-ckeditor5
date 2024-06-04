@@ -1,12 +1,12 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import WProofreader from '../src/wproofreader';
-import WProofreaderEditing from '../src/wproofreaderediting';
-import WProofreaderUI from '../src/wproofreaderui';
-import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing';
-import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing';
-import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing';
-import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing';
-import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode';
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import WProofreader from '../src/wproofreader.js';
+import WProofreaderEditing from '../src/wproofreaderediting.js';
+import WProofreaderUI from '../src/wproofreaderui.js';
+import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing.js';
+import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing.js';
+import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing.js';
+import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing.js';
+import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode.js';
 
 describe('WProofreader', () => {
 	const WPROOFREADER_CONFIG = {
@@ -172,7 +172,7 @@ describe('WProofreader', () => {
 		it('should set user values to the badgeOffset options', () => {
 			const badgeOffsetX = 12;
 			const badgeOffsetY = 13;
-			
+
 			return ClassicEditor
 				.create(element, {
 					plugins: [WProofreader],
