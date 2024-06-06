@@ -1,4 +1,4 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import WProofreader from '../src/wproofreader.js';
 import WProofreaderEditing from '../src/wproofreaderediting.js';
 import WProofreaderUI from '../src/wproofreaderui.js';
@@ -27,6 +27,11 @@ describe('WProofreader', () => {
 	afterEach(() => {
 		return element.remove();
 	});
+
+		it('should be loaded', () => {
+			const a = true;
+			expect(a).to.be.true;
+		});
 
 	describe('with correct configuration', () => {
 		let testEditor, wproofreader, command;

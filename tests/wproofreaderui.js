@@ -1,6 +1,5 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
-import DropdownView from '@ckeditor/ckeditor5-ui/src/dropdown/dropdownview.js';
-import ListView from '@ckeditor/ckeditor5-ui/src/list/listview.js';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import { DropdownView, ListView } from 'ckeditor5/src/ui.js';
 import WProofreader from '../src/wproofreader.js';
 import WProofreaderUI from '../src/wproofreaderui.js';
 import wproofreaderIcon from '../theme/icons/wproofreader.svg';

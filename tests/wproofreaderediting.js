@@ -1,4 +1,4 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import WProofreaderEditing from '../src/wproofreaderediting.js';
 import WProofreaderToggleCommand from '../src/wproofreadertogglecommand.js';
 import WProofreaderSettingsCommand from '../src/wproofreadersettingscommand.js';
