@@ -10,7 +10,7 @@
     "start": "./node_modules/.bin/webpack --mode development -w",
     "build": "./node_modules/.bin/webpack --mode production",
     "build:dist": "node ./scripts/build-dist.mjs",
-    "prepare": "npm run build && npm run build:dist",
+    "prepare": "npm run build:dist",
     "test": "concurrently --kill-others --success \"first\" \"ckeditor5-package-tools test\" \"http-server -c-0 --cors -p 3000 -s\""
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
