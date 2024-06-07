@@ -35,14 +35,14 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	ClassicEditor
 		.create( editorElement, {
-			plugins: [ ..., WProofreader],
-			toolbar: [ ..., 'wproofreader'],
+			plugins: [ ..., WProofreader ],
+			toolbar: [ ..., 'wproofreader' ],
 			wproofreader: {
 				lang: 'en_US', // sets the default language
 				serviceId: 'your-service-ID', // required for the Cloud version only
 				srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
 			}
-		})
+		} )
 	```
 
 	`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
@@ -55,8 +55,8 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	ClassicEditor
 		.create( editorElement, {
-			plugins: [ ..., WProofreader],
-			toolbar: [ ..., 'wproofreader'],
+			plugins: [ ..., WProofreader ],
+			toolbar: [ ..., 'wproofreader' ],
 			wproofreader: {
 				lang: 'en_US', // sets the default language
 				serviceProtocol: 'https',
@@ -65,7 +65,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 				servicePath: 'virtual_directory/api', // by default the virtual_directory is wscservice
 				srcUrl: 'https://host_name/virtual_directory/wscbundle/wscbundle.js'
 			}
-		})
+		} )
 	```
 
 	Unlike the Cloud-based version, the `serviceId` parameter is not used here. Instead, it is required to specify the path to the backend entry point hosted on the client’s infrastructure.
@@ -79,12 +79,12 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	ClassicEditor
 		.create( editorElement, {
-			plugins: [ ..., WProofreader],
-			toolbar: [ ..., 'wproofreader'],
+			plugins: [ ..., WProofreader ],
+			toolbar: [ ..., 'wproofreader' ],
 			wproofreader: {
 				/* config of WProofreader */
 			}
-		})
+		} )
 	```
 
 ## Documentation
