@@ -1,5 +1,3 @@
-
-// import Plugin from '@ckeditor/ckeditor5-core/src/plugin.js';
 import { Plugin } from 'ckeditor5/src/core.js';
 
 export class RealTimeCollaborativeEditing extends Plugin {
