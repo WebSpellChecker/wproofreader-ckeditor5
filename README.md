@@ -70,7 +70,7 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 	Unlike the Cloud-based version, the `serviceId` parameter is not used here. Instead, it is required to specify the path to the backend entry point hosted on the client’s infrastructure.
 
-	For WProofreader that uses `CKEditor5` without legacy methods of installation:
+	For WProofreader that uses CKEditor 5 without legacy methods of installation:
 
 	```js
 	import { ClassicEditor } from 'ckeditor5';
