@@ -45,7 +45,7 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-utils": ">=40.2.0",
+    "@ckeditor/ckeditor5-dev-utils": "^40.2.0",
     "@ckeditor/ckeditor5-dev-build-tools": "^40.2.0",
     "@ckeditor/ckeditor5-package-tools": "^1.1.0",
     "ckeditor5": "nightly",
