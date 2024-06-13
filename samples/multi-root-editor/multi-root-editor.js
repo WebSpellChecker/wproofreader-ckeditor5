@@ -1,5 +1,5 @@
-import { Editor, DataApiMixin } from 'ckeditor5/src/core.js';
-import { getDataFromElement, setDataInElement, mix } from 'ckeditor5/src/utils.js';
+import { Editor, DataApiMixin, getDataFromElement, setDataInElement, mix } from 'ckeditor5';
+
 import MultirootEditorUI from './multi-root-editor-ui.js';
 import MultirootEditorUIView from './multi-root-editor-ui-view.js';
 
