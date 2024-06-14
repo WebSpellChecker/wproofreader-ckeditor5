@@ -1,12 +1,17 @@
-import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import Heading from '@ckeditor/ckeditor5-heading/src/heading';
-import List from '@ckeditor/ckeditor5-list/src/list';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-import WProofreader from '../src/wproofreader';
+import {
+	ClassicEditor as ClassicEditorBase,
+	Essentials,
+	Paragraph,
+	Heading,
+	List,
+	Bold,
+	Italic
+} from 'ckeditor5';
 
-export default class ClassicEditor extends ClassicEditorBase {};
+import 'ckeditor5/ckeditor5.css'
 
-ClassicEditor.builtinPlugins = [Essentials, Paragraph, Heading, List, Bold, Italic, WProofreader];
+import { WProofreader } from '../dist/index.js';
+
+export default class ClassicEditor extends ClassicEditorBase {}
+
+ClassicEditor.builtinPlugins = [ Essentials, Paragraph, Heading, List, Bold, Italic, WProofreader ];

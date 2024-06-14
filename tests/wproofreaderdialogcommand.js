@@ -1,7 +1,7 @@
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-import Command from '@ckeditor/ckeditor5-core/src/command';
-import WProofreader from '../src/wproofreader';
-import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
+import { Command }  from 'ckeditor5/src/core.js';
+import WProofreader from '../src/wproofreader.js';
+import WProofreaderDialogCommand from '../src/wproofreaderdialogcommand.js';
 
 describe('WProofreaderSettingsCommand', () => {
 	const WPROOFREADER_CONFIG = {

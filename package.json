@@ -9,7 +9,9 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack --mode development -w",
     "build": "./node_modules/.bin/webpack --mode production",
-    "test": "concurrently --kill-others --success \"first\" \"node --max_old_space_size=4096 node_modules/@ckeditor/ckeditor5-dev-tests/bin/testautomated.js -c --files=ckeditor5\" \"http-server -c-0 --cors -p 3000 -s\""
+    "build:dist": "node ./scripts/build-dist.mjs",
+    "prepare": "npm run build:dist",
+    "test": "concurrently --kill-others --success \"first\" \"ckeditor5-package-tools test\" \"http-server -c-0 --cors -p 3000 -s\""
   },
   "author": "WebSpellChecker (https://webspellchecker.com/)",
   "bugs": {
@@ -17,14 +19,25 @@
   },
   "homepage": "https://github.com/WebSpellChecker/wproofreader-ckeditor5#readme",
   "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*.css": "./dist/*.css",
+    "./src/*": "./src/*",
+    "./theme/*": "./theme/*",
+    "./package.json": "./package.json"
+  },
   "files": [
+    "dist",
     "lang",
     "src",
     "theme"
   ],
   "keywords": [
     "spelling check",
-    "gramar checking",
+    "grammar checking",
     "spelling checker for ckeditor 5",
     "text proofreading in CKEditor 5",
     "webspellchecker",
@@ -32,15 +45,10 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-basic-styles": ">=16.0.0",
-    "@ckeditor/ckeditor5-dev-tests": ">=16.0.0",
-    "@ckeditor/ckeditor5-dev-utils": ">=13.0.0",
-    "@ckeditor/ckeditor5-editor-classic": ">=16.0.0",
-    "@ckeditor/ckeditor5-essentials": ">=16.0.0",
-    "@ckeditor/ckeditor5-heading": ">=16.0.0",
-    "@ckeditor/ckeditor5-list": ">=16.0.0",
-    "@ckeditor/ckeditor5-paragraph": ">=16.0.0",
-    "@ckeditor/ckeditor5-theme-lark": ">=16.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^40.2.0",
+    "@ckeditor/ckeditor5-dev-build-tools": "^40.2.0",
+    "@ckeditor/ckeditor5-package-tools": "^1.1.0",
+    "ckeditor5": "nightly",
     "concurrently": "^8.0.1",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
@@ -51,7 +59,7 @@
     "webpack": "^5.82.0",
     "webpack-cli": "^5.1.1"
   },
-  "dependencies": {
-    "ckeditor5": ">=16.0.0"
+  "peerDependencies": {
+    "ckeditor5": ">=42.0.0 || ^0.0.0-nightly"
   }
 }
