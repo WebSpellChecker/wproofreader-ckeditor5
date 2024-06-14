@@ -1,5 +1,11 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 3.0.0-alpha.0 – 2024-06-14
+
+This release is intended for testing the new CKEditor 5 installation methods announced in [this post](https://github.com/ckeditor/ckeditor5/issues/15502).
+
+Please note that this release is marked as `alpha`, meaning that it is an experimental release.
+
 ## 2.3.1 – 2023-06-29
 
 * Increase the distance from the badge to the edges of the editor. [#71](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/71).
