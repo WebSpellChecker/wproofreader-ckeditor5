@@ -28,11 +28,6 @@ describe('WProofreader', () => {
 		return element.remove();
 	});
 
-		it('should be loaded', () => {
-			const a = true;
-			expect(a).to.be.true;
-		});
-
 	describe('with correct configuration', () => {
 		let testEditor, wproofreader, command;
 
