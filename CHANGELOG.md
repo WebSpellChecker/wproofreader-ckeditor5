@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 3.0.0 – 2024-06-26
+
+Provide support of the new [CKEditor 5 installation methods](https://github.com/ckeditor/ckeditor5/releases/tag/v42.0.0).
+
 ## 3.0.0-alpha.0 – 2024-06-14
 
 This release is intended for testing the new CKEditor 5 installation methods announced in [this post](https://github.com/ckeditor/ckeditor5/issues/15502).
