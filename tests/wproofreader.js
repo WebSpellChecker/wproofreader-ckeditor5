@@ -2,10 +2,6 @@ import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 import WProofreader from '../src/wproofreader.js';
 import WProofreaderEditing from '../src/wproofreaderediting.js';
 import WProofreaderUI from '../src/wproofreaderui.js';
-import { RealTimeCollaborativeEditing } from './mocks/mock-collaboration-editing.js';
-import { RealTimeCollaborativeTrackChanges } from './mocks/mock-collaboration-editing.js';
-import { RealTimeCollaborativeComments } from './mocks/mock-collaboration-editing.js';
-import { RealTimeCollaborationClient } from './mocks/mock-collaboration-editing.js';
 import { RestrictedEditingMode } from './mocks/mock-restricted-editing-mode.js';
 
 describe('WProofreader', () => {
@@ -75,10 +71,6 @@ describe('WProofreader', () => {
 		it('should contain appType option', () => {
 			expect(wproofreader._options.appType).to.be.exist;
 			expect(wproofreader._options.appType).to.be.equal('proofreader_ck5');
-		});
-
-		it('should not disable dialog option', () => {
-			expect(wproofreader._options.disableDialog).to.be.false;
 		});
 
 		it('should contain restrictedEditingMode option', () => {
@@ -462,87 +454,6 @@ describe('WProofreader', () => {
 		});
 	});
 
-	describe('in CKEditor 5 collaboration mode', () => {
-		it('should disable the dialog option of the WEBSPELLCHECKER because of RealTimeCollaborativeEditing plugin', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [WProofreader, RealTimeCollaborativeEditing],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(editor.plugins.has('RealTimeCollaborativeEditing')).to.be.true;
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-
-		it('should disable the dialog option of the WEBSPELLCHECKER because of RealTimeCollaborativeTrackChanges plugin', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [WProofreader, RealTimeCollaborativeTrackChanges],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(editor.plugins.has('RealTimeCollaborativeTrackChanges')).to.be.true;
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-
-		it('should disable the dialog option of the WEBSPELLCHECKER because of RealTimeCollaborativeComments plugin', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [WProofreader, RealTimeCollaborativeComments],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(editor.plugins.has('RealTimeCollaborativeComments')).to.be.true;
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-
-		it('should disable the dialog option of the WEBSPELLCHECKER because of RealTimeCollaborationClient plugin', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [WProofreader, RealTimeCollaborationClient],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(editor.plugins.has('RealTimeCollaborationClient')).to.be.true;
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-
-		it('should disable the dialog option of the WEBSPELLCHECKER because of collaboration plugins', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [
-						WProofreader,
-						RealTimeCollaborativeEditing,
-						RealTimeCollaborativeTrackChanges,
-						RealTimeCollaborativeComments,
-						RealTimeCollaborationClient
-					],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(editor.plugins.has('RealTimeCollaborativeEditing')).to.be.true;
-					expect(editor.plugins.has('RealTimeCollaborativeTrackChanges')).to.be.true;
-					expect(editor.plugins.has('RealTimeCollaborativeComments')).to.be.true;
-					expect(editor.plugins.has('RealTimeCollaborationClient')).to.be.true;
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-	});
-
 	describe('in CKEditor 5 restricted editing mode', () => {
 		it('should enable the restrictedEditingMode option of the WEBSPELLCHECKER because of RestrictedEditingMode plugin', () => {
 			return ClassicEditor
@@ -560,44 +471,6 @@ describe('WProofreader', () => {
 	});
 
 	describe('for multi root environment', () => {
-		it('should disable the dialog option of the WEBSPELLCHECKER', () => {
-			const editor = new ClassicEditor(element, {
-				plugins: [WProofreader],
-				wproofreader: WPROOFREADER_CONFIG
-			});
-
-			editor.editing.view.domRoots.set('main', element);
-			editor.editing.view.domRoots.set('second', element);
-
-			return editor.initPlugins()
-				.then(() => {
-					editor.ui.init(element);
-					editor.data.init(element);
-
-					editor.fire('ready');
-
-					return editor;
-				})
-				.then(() => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(wproofreader._options.disableDialog).to.be.true;
-				});
-		});
-
-		it('should not disable the dialog option of the WEBSPELLCHECKER', () => {
-			return ClassicEditor
-				.create(element, {
-					plugins: [WProofreader],
-					wproofreader: WPROOFREADER_CONFIG
-				})
-				.then((editor) => {
-					const wproofreader = editor.plugins.get('WProofreader');
-
-					expect(wproofreader._options.disableDialog).to.be.false;
-				});
-		});
-
 		describe('should synchronize WEBSPELLCHECKER options in the editor with', () => {
 			let editor;
 
