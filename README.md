@@ -5,6 +5,8 @@ The multilingual spelling and grammar checking solution for CKEditor 5. It provi
 
 ![WProofreader plugin for CKEditor 5 View](https://webspellchecker.com/app/images/wproofreader_plugin_for_ckeditor5_v3.png)
 
+Starting with version 3.1.0, the WProofreader plugin for CKEditor 5 offers basic TypeScript support. The package contains a [type definition file](https://github.com/WebSpellChecker/wproofreader-ckeditor5/blob/master/src/wproofreader.d.ts) (.d.ts), enabling integration and customization of the functionality using [WProofreader options](https://webspellchecker.com/docs/api/wscbundle/Options.html) in TypeScript projects.
+
 WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreader component with slight adaptation to the view and features of the editor. For more details, visit the [WProofreader repo](https://github.com/WebSpellChecker/wproofreader) or [official web page](https://webspellchecker.com/wsc-proofreader/).
 
 ## Table of contents
