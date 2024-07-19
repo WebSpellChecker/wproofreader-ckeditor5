@@ -41,13 +41,6 @@ export default class WProofreader extends Plugin {
 
 		this._instances = [];
 
-		this._collaborationPluginNames = [
-			'RealTimeCollaborativeEditing',
-			'RealTimeCollaborativeTrackChanges',
-			'RealTimeCollaborativeComments',
-			'RealTimeCollaborationClient'
-		];
-
 		this._restrictedEditingName = 'RestrictedEditingMode';
 	}
 
@@ -191,32 +184,8 @@ export default class WProofreader extends Plugin {
 	 * @private
 	 */
 	_setFields() {
-		this._isMultiRoot = this._checkMultiRoot();
-		this._isCollaborationMode = this._checkCollaborationMode();
 		this._isRestrictedEditingMode = this._checkRestrictedEditingMode();
 		this._options = this._createOptions();
-	}
-
-	/**
-	 * Checks if the current editor has several roots.
-	 * @private
-	 */
-	_checkMultiRoot() {
-		return this.editor.editing.view.domRoots.size > 1 ? true : false;
-	}
-
-	/**
-	 * Checks if the current editor in the real-time collaboration mode.
-	 * @private
-	 */
-	_checkCollaborationMode() {
-		for (let i = 0; i <= this._collaborationPluginNames.length; i++) {
-			if (this.editor.plugins.has(this._collaborationPluginNames[i])) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -234,7 +203,6 @@ export default class WProofreader extends Plugin {
 	_createOptions() {
 		return {
 			appType: 'proofreader_ck5',
-			disableDialog: this._isMultiRoot || this._isCollaborationMode,
 			restrictedEditingMode: this._isRestrictedEditingMode,
 			disableBadgePulsing: true,
 			onCommitOptions: this._onCommitOptions.bind(this),
