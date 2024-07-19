@@ -23,7 +23,10 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./*.css": "./dist/*.css",
     "./src/*": "./src/*",
     "./theme/*": "./theme/*",
@@ -61,5 +64,6 @@
   },
   "peerDependencies": {
     "ckeditor5": ">=42.0.0"
-  }
+  },
+  "types": "./src/index.d.ts"
 }
