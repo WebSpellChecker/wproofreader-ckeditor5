@@ -1,5 +1,11 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+# 3.1.0 - 2024-07-19
+
+* Add basic TypeScript support. [#76](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/76).
+* Enable 'Proofread in dialog' for multi-root and real-time collaboration modes. [#78](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/78).
+* Internal changes (updated dependencies, documentation, etc.).
+
 ## 3.0.0 – 2024-06-26
 
 Provide support of the new [CKEditor 5 installation methods](https://github.com/ckeditor/ckeditor5/releases/tag/v42.0.0).
