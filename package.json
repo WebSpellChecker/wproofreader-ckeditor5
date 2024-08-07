@@ -27,7 +27,8 @@
       "types": "./src/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./*.css": "./dist/*.css",
+    "./*": "./dist/*",
+    "./browser/*": null,
     "./src/*": "./src/*",
     "./theme/*": "./theme/*",
     "./package.json": "./package.json"
@@ -48,10 +49,10 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-utils": "^40.2.0",
-    "@ckeditor/ckeditor5-dev-build-tools": "^40.2.0",
-    "@ckeditor/ckeditor5-package-tools": "^1.1.0",
-    "ckeditor5": "^42.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^42.0.0",
+    "@ckeditor/ckeditor5-dev-build-tools": "^42.0.0",
+    "@ckeditor/ckeditor5-package-tools": "^2.0.0",
+    "ckeditor5": "^43.0.0",
     "concurrently": "^8.0.1",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
@@ -63,7 +64,7 @@
     "webpack-cli": "^5.1.1"
   },
   "peerDependencies": {
-    "ckeditor5": ">=42.0.0"
+    "ckeditor5": ">=43.0.0"
   },
   "types": "./src/index.d.ts"
 }
