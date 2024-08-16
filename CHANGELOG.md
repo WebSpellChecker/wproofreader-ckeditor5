@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+# 3.1.2 - 2024-08-16
+
+* Internal changes (updated dependencies, documentation, etc.).
+
 # 3.1.1 - 2024-08-07
 
 * Additional changes for new CKEditor 5 installation methods.
