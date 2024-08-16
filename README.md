@@ -19,60 +19,21 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 
 ## Install instructions
 
-1. Install the npm module.
+1. Install the plugin.
+
+	You can integrate the plugin using one of these methods:
+	- [Using npm](#using-npm): Recommended for projects utilizing a JavaScript bundler.
+	- [Using CDN](#using-cdn): Suitable for environments where no build process is involved.
+
+	### Using npm
+
+	To install the plugin via npm, run the following command:
 
 	```
 	npm install @webspellchecker/wproofreader-ckeditor5
 	```
 
-2. Add a new plugin and its configuration to CKEditor.
-
-	Set the WProofreader configuration data into the `wproofreader` field of the CKEditor 5 config. All available options are described in [API docs](https://webspellchecker.com/docs/api/wscbundle/Options.html).
-
-	For the **Cloud-based** version of WProofreader:
-
-	```js
-	import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
-	...
-
-	ClassicEditor
-		.create( editorElement, {
-			plugins: [ ..., WProofreader ],
-			toolbar: [ ..., 'wproofreader' ],
-			wproofreader: {
-				lang: 'en_US', // sets the default language
-				serviceId: 'your-service-ID', // required for the Cloud version only
-				srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
-			}
-		} )
-	```
-
-	`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
-
-	For the **Server-based** version of WProofreader:
-
-	```js
-	import WProofreader from '@webspellchecker/wproofreader-ckeditor5/src/wproofreader';
-	...
-
-	ClassicEditor
-		.create( editorElement, {
-			plugins: [ ..., WProofreader ],
-			toolbar: [ ..., 'wproofreader' ],
-			wproofreader: {
-				lang: 'en_US', // sets the default language
-				serviceProtocol: 'https',
-				serviceHost: 'localhost',
-				servicePort: '443',
-				servicePath: 'virtual_directory/api', // by default the virtual_directory is wscservice
-				srcUrl: 'https://host_name/virtual_directory/wscbundle/wscbundle.js'
-			}
-		} )
-	```
-
-	Unlike the Cloud-based version, the `serviceId` parameter is not used here. Instead, it is required to specify the path to the backend entry point hosted on the client’s infrastructure.
-
-	For WProofreader that uses "CKEditor 5" without legacy methods of installation:
+	Import the WProofreader plugin into the project and configure it. Then, add it to the `create()` method configuration and include it as a toolbar item.
 
 	```js
 	import { ClassicEditor } from 'ckeditor5';
@@ -88,6 +49,71 @@ WProofreader plugin for CKEditor 5 inherits all functionality of the WProofreade
 			}
 		} )
 	```
+
+	### Using CDN
+
+	To load the script, utilize the browser's [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) feature. This allows you to map a simple specifier to the full CDN URL, making it easier to reference the necessary files.
+
+	```html
+	<script type="importmap">
+	{
+		"imports": {
+			"ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+			"@webspellchecker/wproofreader-ckeditor5": "https://cdn.jsdelivr.net/npm/@webspellchecker/wproofreader-ckeditor5@3.1.1/dist/browser/index.js"
+
+		}
+	}
+	</script>
+	```
+
+	In the following script tag, import the WProofreader plugin, add it to the `plugins` array, and include it as a toolbar item.
+
+	```html
+	<script type="module">
+        import { ClassicEditor } from 'ckeditor5';
+        import { WProofreader } from '@webspellchecker/wproofreader-ckeditor5';
+
+		ClassicEditor
+			.create( editorElement, {
+				plugins: [ ..., WProofreader ],
+				toolbar: [ ..., 'wproofreader' ],
+				wproofreader: {
+					/* config of WProofreader */
+				}
+			} )
+    </script>
+	```
+
+2. Configure the plugin
+
+	After installing the plugin, you need to configure it in the CKEditor 5 setup. The configuration is added to the `wproofreader` field. For a detailed list of available customization options, refer to the [documentation](https://webspellchecker.com/docs/api/wscbundle/Options.html).
+
+	For the **Cloud-based** version of WProofreader:
+
+	```js
+	wproofreader: {
+		lang: 'en_US', // sets the default language
+		serviceId: 'your-service-ID', // required for the Cloud version only
+		srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
+	}
+	```
+
+	`serviceId` is a mandatory parameter for activating and using the plugin pointed to the Cloud-based version of WProofreader.
+
+	For the **Server-based** version of WProofreader:
+
+	```js
+	wproofreader: {
+		lang: 'en_US', // sets the default language
+		serviceProtocol: 'https',
+		serviceHost: 'localhost',
+		servicePort: '443',
+		servicePath: 'virtual_directory/api', // by default the virtual_directory is wscservice
+		srcUrl: 'https://host_name/virtual_directory/wscbundle/wscbundle.js'
+	}
+	```
+
+	Unlike the Cloud-based version, the `serviceId` parameter is not used here. Instead, it is required to specify the path to the backend entry point hosted on the client’s infrastructure.
 
 ## Documentation
 
