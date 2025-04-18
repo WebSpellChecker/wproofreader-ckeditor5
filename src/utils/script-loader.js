@@ -42,11 +42,13 @@ export class ScriptLoader {
 	}
 
 	/**
-	 * Checks if the script exists on the page.
+	 * Checks if the script exists on the page and finished loading.
 	 * @private
 	 */
 	_isScriptOnPage() {
-		return document.querySelector('script[src="' + this._src + '"]') ? true : false;
+		const scriptTag = document.querySelector('script[src="' + this._src + '"]');
+
+		return scriptTag && scriptTag.dataset.loaded === 'true';
 	}
 
 	/**
@@ -84,6 +86,8 @@ export class ScriptLoader {
 	 */
 	_subscribeOnScriptLoad() {
 		this._script.onload = () => {
+
+			this._script.dataset.loaded = 'true';
 
 			this._globalSrcStorage.eachOnLoad(this._src, (callback) => {
 				callback();
