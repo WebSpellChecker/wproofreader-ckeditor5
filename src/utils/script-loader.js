@@ -48,7 +48,7 @@ export class ScriptLoader {
 	_isScriptOnPage() {
 		const scriptTag = document.querySelector('script[src="' + this._src + '"]');
 
-		return scriptTag && scriptTag.dataset.loaded === 'true';
+		return !!scriptTag && scriptTag.dataset.loaded === 'true';
 	}
 
 	/**
