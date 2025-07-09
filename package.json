@@ -49,10 +49,10 @@
     "wproofreader"
   ],
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-utils": "^42.0.0",
-    "@ckeditor/ckeditor5-dev-build-tools": "^42.0.0",
+    "@ckeditor/ckeditor5-dev-build-tools": "^43.1.0",
+    "@ckeditor/ckeditor5-dev-utils": "^43.1.0",
     "@ckeditor/ckeditor5-package-tools": "^2.0.0",
-    "ckeditor5": "^43.0.0",
+    "ckeditor5": "^46.0.0",
     "concurrently": "^8.0.1",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
@@ -64,7 +64,7 @@
     "webpack-cli": "^5.1.1"
   },
   "peerDependencies": {
-    "ckeditor5": ">=43.0.0"
+    "ckeditor5": ">=46.0.0"
   },
   "types": "./src/index.d.ts"
 }
