@@ -1,5 +1,9 @@
 # WProofreader plugin for CKEditor 5 Changelog
 
+## 4.0.0 - 2025-07-09
+
+Provide support of [CKEditor 5 v46.0.0](https://github.com/ckeditor/ckeditor5/releases/tag/v46.0.0).
+
 ## 3.1.3 - 2025-05-01
 
 * Fix issue when WEBSPELLCHECKER is undefined after script loading. [#92](https://github.com/WebSpellChecker/wproofreader-ckeditor5/issues/92).
